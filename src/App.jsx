@@ -4,7 +4,7 @@ import Header from './components/Header';
 import Hero from './components/Hero';
 import About from './components/About';
 import Facilities from './components/Facilities';
-import WhyChooseUs from './components/Whychooseus';
+import WhyChooseUs from './components/WhyChooseUs';
 import GoogleReviews from './components/GoogleReviews';
 
 function App() {
