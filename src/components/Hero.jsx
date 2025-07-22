@@ -26,6 +26,8 @@ const slides = [
   },
 ];
 
+
+
 const Hero = () => {
   return (
     <div className="w-full h-[90vh] relative overflow-hidden">
@@ -48,7 +50,7 @@ const Hero = () => {
                 <h1 className="w-full text-3xl md:text-3xl sm:text-xl text-center font-bold mb-4 drop-shadow-lg text-shadow-md text-shadow-gray-700">
                   {slide.title}
                 </h1>
-                <p className="text-md md:text-2xl text-center drop-shadow text-shadow-md text-shadow-gray-700">
+                <p className="text-md md:text-2xl text-center drop-shadow text-shadow-md text-shadow-gray-700 max-w-[60vw]">
                   {slide.subtitle}
                 </p>
               </div>
