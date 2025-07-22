@@ -1,53 +1,51 @@
 import React from "react";
-import bgImage from "../assets/room.jpg"; // Your local image or external URL
-import Header from "./Header";
+import roomImage from "../assets/room.jpg";
+import room1 from "../assets/room.jpg"; // use actual image paths
+import room2 from "../assets/room.jpg";
+import room3 from "../assets/room.jpg";
+import room4 from "../assets/room.jpg";
 
 const About = () => {
   return (
     <>
-    {/* <Header/> */}
+      {/* ABOUT SECTION */}
+      <section className="px-6 py-12 bg-white text-gray-800">
+        <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center">
+          {/* LEFT: TEXT */}
+          <div>
+            <h2 className="text-4xl font-bold mb-4">About Us</h2>
+            <p className="mb-4 text-lg">
+              Welcome to Shivam PG – The Best{" "}
+              <span className="text-orange-500 font-bold">
+                Boys and Girls PG in Bopal, Ahmedabad
+              </span>{" "}
+              where comfort meets convenience! We provide a safe, secure, and hygienic living experience for students and working professionals looking for a home away from home.
+            </p>
+            <p className="mb-6">
+              Our PG offers fully furnished rooms with modern amenities, nutritious home-cooked meals, and round-the-clock security. We prioritize quality, cleanliness, and comfort.
+            </p>
+            <button className="bg-yellow-500 hover:bg-yellow-600 text-white font-semibold px-5 py-2 rounded">
+              Call Now to Book!
+            </button>
+          </div>
 
-    {/* <Header/> */}
-    <div>
-      {/* Hero Section */}
-      <div
-        className="relative bg-cover bg-center h-[400px] flex items-center justify-center"
-        style={{
-          backgroundImage: `url(${bgImage})`,
-        }}
-      >
-        <div className="absolute inset-0 bg-black opacity-70"></div>
-        <h1 className="text-white text-4xl font-bold z-10">ABOUT US</h1>
-      </div>
-
-      {/* About Paragraph */}
-      <section className="px-6 md:px-20 py-10 bg-white">
-        <p className="text-lg text-gray-800 leading-relaxed max-w-4xl mx-auto text-center">
-          At Shivam PG, we understand how important it is to find a comfortable,
-          safe, and well-maintained place when you are away from home. That’s
-          why we created a premium yet affordable{" "}
-          <span className="bg-orange-400 text-white font-bold px-1 rounded">
-            PG for boys & girls in Bopal
-          </span>
-          , catering to students and professionals who need a hassle-free stay
-          with all essential amenities.
-        </p>
-      </section>
-
-      {/* Why Stand Out Section */}
-      <section className="px-6 md:px-20 py-10 text-center">
-        <h2 className="text-3xl font-bold mb-4">Why Do We Stand Out?</h2>
-        <p className="text-gray-700 text-base md:text-lg max-w-3xl mx-auto">
-          Unlike other <span className="font-semibold">PGs in Bopal</span> that
-          compromise on food quality and hygiene, Shivam PG prioritizes clean,
-          comfortable living and nutritious, home-style meals. We ensure a
-          well-maintained environment with regular cleaning and healthy dining,
-          providing a safe and peaceful stay for students and professionals who
-          value quality and well-being.
-        </p>
-      </section>
-
-      {/* WhatsApp Floating Button */}
+          {/* RIGHT: IMAGE + STATS */}
+          <div className="relative">
+            <img
+              src={roomImage}
+              alt="Room"
+              className="rounded-lg shadow-lg w-full h-auto object-cover"
+            />
+            <div className="absolute top-6 left-6 bg-white p-4 rounded-lg shadow-md text-center">
+              <h3 className="text-xl font-bold">250</h3>
+              <p className="text-sm">Happy Tenants!</p>
+            </div>
+            <div className="absolute bottom-6 right-6 bg-white p-4 rounded-lg shadow-md text-center">
+              <h3 className="text-xl font-bold">15+</h3>
+              <p className="text-sm">PG</p>
+            </div>
+          </div>
+          {/* WhatsApp Floating Button */}
       <a
         href="https://wa.me/918972225520" // Replace with your number
         className="fixed bottom-6 right-6 bg-green-500 text-white px-5 py-2 rounded-full shadow-lg flex items-center gap-2 z-50"
@@ -61,7 +59,11 @@ const About = () => {
         />
         WhatsApp us
       </a>
-    </div>
+        </div>
+      </section>
+
+    
+      
     </>
   );
 };
