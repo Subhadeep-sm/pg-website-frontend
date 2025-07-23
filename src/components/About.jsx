@@ -17,7 +17,7 @@ const About = () => {
             <p className="mb-4 text-lg">
               Welcome to Shivam PG – The Best{" "}
               <span className="text-orange-500 font-bold">
-                Boys and Girls PG in Bopal, Ahmedabad
+                Boys and Girls PG in Bopal, Kolkata
               </span>{" "}
               where comfort meets convenience! We provide a safe, secure, and hygienic living experience for students and working professionals looking for a home away from home.
             </p>
