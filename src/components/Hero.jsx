@@ -44,7 +44,7 @@ const Hero = () => {
               className="w-full h-full min-h-screen min-w-screen bg-cover bg-center relative  items-center justify-center"
               style={{ backgroundImage: `url('${slide.image}')` }}
             >
-              <div className="absolute inset-0 bg-black opacity-60"></div>
+              <div className="absolute inset-0 bg-black opacity-50"></div>
 
               <div className="absolute flex flex-col items-center justify-center min-h-screen min-w-screen z-10 text-white ">
                 <h1 className="w-full text-3xl md:text-3xl sm:text-xl text-center font-bold mb-4 drop-shadow-lg text-shadow-md text-shadow-gray-700">
