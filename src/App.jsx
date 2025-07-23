@@ -6,6 +6,8 @@ import About from './components/About';
 import Facilities from './components/Facilities';
 import WhyChooseUs from './components/WhyChooseUs';
 import GoogleReviews from './components/GoogleReviews';
+import Footer from './components/Footer';
+import Map from './components/Map';
 
 function App() {
   return (
@@ -18,10 +20,12 @@ function App() {
         <>
         <Header/>
         <Hero />                 
-      <h1 className="text-4xl text-center mt-10"></h1>
+      {/* <h1 className="text-4xl text-center mt-10"></h1> */}
         <About />     
         <WhyChooseUs/>
         <GoogleReviews/>
+        <Map />
+        <Footer />
         </>
       } />
 

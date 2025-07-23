@@ -1,4 +1,5 @@
 import React from "react";
+import Footer from "./Footer";
 import {
   FaBed,
   FaUtensils,
@@ -44,7 +45,7 @@ const Facilities = () => {
           Enjoy top-notch amenities designed for comfort and convenience.
         </p>
 
-        <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 max-w-7xl mx-auto">
+        <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 max-w-7xl mx-auto mb-10">
           {facilitiesData.map((facility, index) => (
             <div
               key={index}
@@ -56,6 +57,8 @@ const Facilities = () => {
           ))}
         </div>
       </div>
+
+      <Footer />
     </>
   );
 };
