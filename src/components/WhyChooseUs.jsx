@@ -37,19 +37,25 @@ const WhyChooseUs = () => {
     {/* FEATURES LIST */}
                 <div className="flex-1 space-y-4">
                   <div className="bg-white p-4 rounded shadow-md">
-                    <strong>Prime Location</strong> – Near educational institutes & workplaces
+                    <strong>Prime Location</strong> – Near top educational institutes & IT hub
                   </div>
                   <div className="bg-white p-4 rounded shadow-md">
-                    <strong>Tasty & Healthy Meals</strong> – Daily home-cooked food
+                    <strong>Tasty & Healthy Meals</strong> – Daily home-cooked Veg and Non-Veg food
                   </div>
                   <div className="bg-white p-4 rounded shadow-md">
                     <strong>Safe & Secure Stay</strong> – 24/7 security & CCTV surveillance
                   </div>
                   <div className="bg-white p-4 rounded shadow-md">
-                    <strong>Daily Cleaning & Laundry</strong> – Hygiene is our top priority
+                    <strong>Daily Cleaning </strong> – Hygiene is our top priority
                   </div>
                   <div className="bg-white p-4 rounded shadow-md">
-                    <strong>Affordable Pricing</strong> – Best value for premium amenities
+                    <strong>Self Laundry </strong> – Each floor with washing machine
+                  </div>
+                  <div className="bg-white p-4 rounded shadow-md">
+                    <strong>WiFi Available </strong> – 24/7 high-speed internet service
+                  </div>
+                  <div className="bg-white p-4 rounded shadow-md">
+                    <strong>Affordable Pricing</strong> – Rooms starting at 6000 only
                   </div>
                 </div>
     

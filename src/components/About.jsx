@@ -15,14 +15,14 @@ const About = () => {
           <div>
             <h2 className="text-4xl font-bold mb-4">About Us</h2>
             <p className="mb-4 text-lg">
-              Welcome to Shivam PG – The Best{" "}
+              Discover Royal PG – A Premium {" "}
               <span className="text-orange-500 font-bold">
-                Boys and Girls PG in Bopal, Kolkata
+                Boys and Girls PG in Mahisbathan, Saltlake Sector 5, Kolkata,
               </span>{" "}
-              where comfort meets convenience! We provide a safe, secure, and hygienic living experience for students and working professionals looking for a home away from home.
+              designed for comfort, safety, and peace of mind. Whether you're a student or a working professional, we offer an ideal stay that feels just like home.
             </p>
             <p className="mb-6">
-              Our PG offers fully furnished rooms with modern amenities, nutritious home-cooked meals, and round-the-clock security. We prioritize quality, cleanliness, and comfort.
+              Enjoy spacious, fully furnished rooms, healthy and tasty homemade food, and reliable 24/7 security. At Royal PG, we maintain top-notch hygiene and service standards—setting us apart from other PGs in the Saltlake area that often fall short on cleanliness and care.
             </p>
             <button className="bg-yellow-500 hover:bg-yellow-600 text-white font-semibold px-5 py-2 rounded">
               Call Now to Book!
