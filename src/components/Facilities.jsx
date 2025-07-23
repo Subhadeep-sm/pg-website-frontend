@@ -1,54 +1,61 @@
 import React from "react";
-import roomImage from "../assets/facilities-room.jpg"; // use your local image or online link
+import {
+  FaBed,
+  FaUtensils,
+  FaLock,
+  FaBath,
+  FaCouch,
+  FaGasPump,
+  FaTint,
+  FaWater,
+  FaBroom,
+  FaBlender,
+} from "react-icons/fa";
+import { GiElevator } from "react-icons/gi";
+import { MdOutlineKitchen, MdOutlineCleaningServices } from "react-icons/md";
 import Header from "./Header";
 
+const facilitiesData = [
+  { icon: <FaBed size={40} />, title: "1,2,3 Sharing Rooms (AC / Non-AC), Personal Bed" },
+  { icon: <FaUtensils size={40} />, title: "Breakfast, Lunch & Dinner" },
+  { icon: <FaLock size={40} />, title: "Cupboards With Locks" },
+  { icon: <FaBath size={40} />, title: "Attached / Common Bathroom" },
+  { icon: <FaBed size={40} />, title: "1,2,3 Sharing Rooms (AC / Non-AC), Personal Bed" },
+  { icon: <FaUtensils size={40} />, title: "Breakfast, Lunch & Dinner" },
+  { icon: <FaLock size={40} />, title: "Cupboards With Locks" },
+  { icon: <FaBath size={40} />, title: "Attached / Common Bathroom" },
+  { icon: <GiElevator size={40} />, title: "Lift Facility" },
+  { icon: <FaBlender size={40} />, title: "Refrigerator" },
+  { icon: <MdOutlineCleaningServices size={40} />, title: "Washing Machine" },
+  { icon: <FaCouch size={40} />, title: "Sofa/Dining Table with Chair" },
+  { icon: <MdOutlineKitchen size={40} />, title: "Gas Burner and Kitchen Facilities" },
+  { icon: <FaTint size={40} />, title: "Purified Drinking Water" },
+  { icon: <FaWater size={40} />, title: "24/7 Water Supply" },
+  { icon: <FaBroom size={40} />, title: "Daily Housekeeping" },
+];
 
 const Facilities = () => {
   return (
     <>
-    <Header />
-    <div>
-      {/* Header Hero Image with Title */}
-      <div
-        className="relative h-[400px] bg-cover bg-center flex items-center justify-center"
-        style={{
-          backgroundImage: `url(${roomImage})`,
-        }}
-      >
-        <div className="absolute inset-0 bg-black opacity-60"></div>
-        <h1 className="text-white text-3xl md:text-4xl font-bold z-10">
-          Shivam PG Facilities
-        </h1>
-      </div>
-
-      {/* PG Amenities Section */}
-      <section className="py-10 px-4 md:px-20 text-center bg-white">
-        <h2 className="text-2xl font-bold mb-4">PG Amenities</h2>
-        <p className="max-w-3xl mx-auto text-gray-700 text-base md:text-lg leading-relaxed">
-          Shivam PG provides top-notch amenities to ensure a hassle-free and
-          comfortable stay. With world-class facilities like high-speed Wi-Fi,
-          nutritious meals, regular housekeeping, and secure premises, residents
-          enjoy convenience and peace of mind. Every detail is designed to
-          support a smooth, stress-free lifestyle for students and professionals
-          alike.
+      <Header />
+      <div className="bg-[#f0f9fb] min-h-screen p-6">
+        <h2 className="text-center text-3xl font-bold mb-4 text-[#152b37]">Facilities</h2>
+        <p className="text-center text-[#295061] mb-10">
+          Enjoy top-notch amenities designed for comfort and convenience.
         </p>
-      </section>
 
-      {/* WhatsApp Button */}
-      <a
-        href="https://wa.me/919999999999"
-        className="fixed bottom-6 right-6 bg-green-500 text-white px-5 py-2 rounded-full shadow-lg flex items-center gap-2 z-50"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        <img
-          src="https://cdn-icons-png.flaticon.com/512/733/733585.png"
-          alt="WhatsApp"
-          className="w-5 h-5"
-        />
-        WhatsApp us
-      </a>
-    </div>
+        <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 max-w-7xl mx-auto">
+          {facilitiesData.map((facility, index) => (
+            <div
+              key={index}
+              className="bg-white rounded-2xl shadow-sm border border-[#d9f1f4] p-6 flex flex-col items-center text-center hover:shadow-md hover:scale-[1.02] transition-all duration-200"
+            >
+              <div className="text-[#295061] mb-4">{facility.icon}</div>
+              <p className="text-[#152b37] font-medium text-sm">{facility.title}</p>
+            </div>
+          ))}
+        </div>
+      </div>
     </>
   );
 };
