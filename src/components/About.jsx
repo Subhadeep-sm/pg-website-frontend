@@ -6,7 +6,7 @@ const About = () => {
     <>
       {/* ABOUT SECTION */}
       <section className="px-6 py-12 bg-[#fff] text-[#152b37]">
-                    <h2 className=" max-w-7xl mx-auto text-4xl font-bold mb-4 text-[#295061]">About Us</h2>
+                    <h2 className=" max-w-7xl mx-auto text-4xl font-bold mb-4 text-[#393E46]">About Us</h2>
 
         <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center">
 
