@@ -32,7 +32,7 @@ const About = () => {
             {/* <h2 className="text-4xl font-bold mb-4 text-[#295061]">About Us</h2> */}
             <p className="mb-4 text-lg">
               Discover Royal PG – A Premium {" "}
-              <span className="text-[#222831] font-bold">
+              <span className="text-[#7f7566] font-bold">
                 Boys and Girls PG in Mahisbathan, Saltlake Sector 5, Kolkata,
               </span>{" "}
               designed for comfort, safety, and peace of mind. Whether you're a student or a working professional, we offer an ideal stay that feels just like home.

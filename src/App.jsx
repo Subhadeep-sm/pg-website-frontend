@@ -36,13 +36,28 @@ function App() {
           <Route path="/facilities" element={<Facilities />} />
           <Route path="/contact" element={
             <>
+              <Header />
               <Contact />
               <Map />
               <Footer />
             </>
           } />
 
-          <Route path="/BoysPg" element={<BoysPg />} />
+          <Route path="/BoysPg" element={
+            <>
+
+            <Header />
+            <BoysPg />
+            <Footer/>
+            
+            </>
+            
+            
+            } />
+          
+          
+          
+          
 
 
 
