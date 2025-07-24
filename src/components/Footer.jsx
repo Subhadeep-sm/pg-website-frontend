@@ -3,21 +3,21 @@ import { FaPhone, FaMapMarkerAlt, FaWhatsapp } from "react-icons/fa";
 
 const Footer = () => {
   return (
-    <footer className="bg-[#948979] text-white relative z-10 border-t border-[#295061]">
+    <footer className="bg-[#222831] text-white relative z-10 border-t border-[#295061]">
       
 
       {/* Info Section */}
-      <div className="bg-[#948979] text-[#152b37] py-10 px-6 md:px-20 grid grid-cols-1 md:grid-cols-3 gap-10 items-start">
+      <div className="bg-[#222831] text-[#fff] py-10 px-6 md:px-20 grid grid-cols-1 md:grid-cols-3 gap-10 items-start">
         {/* Logo and Name */}
         <div>
           <h1 className="text-3xl font-bold mb-3">
             <span className="text-[#fff]">ROYAL</span>
             <span className="text-[#fff]"> PG</span>
             
-            <div className="w-16 h-1 bg-[#b7e1ea] mt-2 rounded"></div>
+            <div className="w-16 h-1 bg-[#fff] mt-2 rounded"></div>
           </h1>
 
-          <p className="text-sm text-[#295061] mt-50">hi</p>
+          <p className="text-sm text-[#fff] mt-50">hi</p>
         </div>
 
         {/* Contact Info */}
