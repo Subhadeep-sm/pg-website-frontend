@@ -6,7 +6,7 @@ const About = () => {
     <>
       {/* ABOUT SECTION */}
       <section className="px-6 py-12 bg-[#fff] text-[#152b37]">
-                    <h2 className=" max-w-7xl mx-auto text-4xl font-bold mb-4 text-[#295061]">About Us</h2>
+                    <h2 className=" max-w-7xl mx-auto text-4xl font-bold mb-4 text-[#222831]">About Us</h2>
 
         <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center">
 
@@ -17,12 +17,12 @@ const About = () => {
               alt="Room"
               className="rounded-lg shadow-lg w-full h-auto object-cover"
             />
-            <div className="absolute top-6 left-6 bg-[#d9f1f4] p-4 rounded-lg shadow-md text-center">
-              <h3 className="text-xl font-bold text-[#295061]">250</h3>
+            <div className="absolute top-6 left-6 bg-[#faf0e6] p-4 rounded-lg shadow-md text-center">
+              <h3 className="text-xl font-bold text-[#948979]">250</h3>
               <p className="text-sm">Happy Tenants!</p>
             </div>
-            <div className="absolute bottom-6 right-6 bg-[#d9f1f4] p-4 rounded-lg shadow-md text-center">
-              <h3 className="text-xl font-bold text-[#295061]">15+</h3>
+            <div className="absolute bottom-6 right-6 bg-[#faf0e6] p-4 rounded-lg shadow-md text-center">
+              <h3 className="text-xl font-bold text-[#948979]">15+</h3>
               <p className="text-sm">PG</p>
             </div>
           </div>
@@ -40,7 +40,7 @@ const About = () => {
             <p className="mb-6">
               Enjoy spacious, fully furnished rooms, healthy and tasty homemade food, and reliable 24/7 security. At Royal PG, we maintain top-notch hygiene and service standards—setting us apart from other PGs in the Saltlake area that often fall short on cleanliness and care.
             </p>
-            <button className="bg-[#295061] hover:bg-[#86ccda] hover:text-[#152b37] text-white font-semibold px-5 py-2 rounded">
+            <button className="bg-[#222831] hover:bg-[#948979] hover:text-[#222831] text-white font-semibold px-5 py-2 rounded">
               Call Now to Book!
             </button>
           </div>
