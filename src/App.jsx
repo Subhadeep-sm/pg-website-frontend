@@ -8,33 +8,64 @@ import WhyChooseUs from './components/WhyChooseUs';
 import GoogleReviews from './components/GoogleReviews';
 import Footer from './components/Footer';
 import Map from './components/Map';
+import Contact from './components/Contact';
+import BoysPg from './components/BoysPg';
 
 function App() {
   return (
     <>
       <Router>
         <Routes>
-      
 
-      <Route path="/" element={
-        <>
-        <Header/>
-        <Hero />                 
-      {/* <h1 className="text-4xl text-center mt-10"></h1> */}
-        <About />     
-        <WhyChooseUs/>
-        <GoogleReviews/>
-        <Map />
-        <Footer />
-        </>
-      } />
 
-      <Route path="/aboutus" element={<About />} />
+          <Route path="/" element={
+            <>
+              <Header />
+              <Hero />
+              {/* <h1 className="text-4xl text-center mt-10"></h1> */}
+              <About />
+              <WhyChooseUs />
+              <GoogleReviews />
+              <Map />
+              <Footer />
+            </>
+          } />
 
-      <Route path="/facilities" element={<Facilities />} />
+          <Route path="/aboutus" element={<About />} />
 
-      </Routes>
-    </Router>
+          <Route path="/facilities" element={<Facilities />} />
+          <Route path="/contact" element={
+            <>
+              <Header />
+              <Contact />
+              <Map />
+              <Footer />
+            </>
+          } />
+
+          <Route path="/BoysPg" element={
+            <>
+
+            <Header />
+            <BoysPg />
+            <Footer/>
+            
+            </>
+            
+            
+            } />
+          
+          
+          
+          
+
+
+
+
+
+
+        </Routes>
+      </Router>
     </>
   );
 }
