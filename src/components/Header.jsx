@@ -22,7 +22,7 @@ const Header = () => {
           <Link to="/BoysPg">Boys PG</Link>
           <Link to="/GirlsPg">Girls PG</Link>
           <Link to="/contact">Contact Us</Link>
-          <Link to="/contact"> Admin login</Link>
+          <Link to="/admin"> Admin Login</Link>
         </nav>
 
         {/* Hamburger Icon */}
