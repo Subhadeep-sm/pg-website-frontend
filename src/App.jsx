@@ -10,6 +10,12 @@ import Footer from './components/Footer';
 import Map from './components/Map';
 import Contact from './components/Contact';
 import BoysPg from './components/BoysPg';
+import GirlsPg from './components/GirlsPg';
+import Admin from './components/Admin';
+import Login from './components/Login';
+import ForgotPassword from './components/ForgotPassword';
+import ResetPassword from './components/ResetPassword';
+import AdminDashboard from './components/AdminDashboard';
 
 function App() {
   return (
@@ -46,18 +52,53 @@ function App() {
           <Route path="/BoysPg" element={
             <>
 
-            <Header />
-            <BoysPg />
-            <Footer/>
-            
+              <Header />
+              <BoysPg />
+              <Footer />
+
             </>
-            
-            
-            } />
-          
-          
-          
-          
+
+
+          } />
+          <Route path="/GirlsPg" element={
+            <>
+
+              <Header />
+              <GirlsPg />
+              <Footer />
+
+            </>
+
+
+          } />
+          <Route path="/admin" element={
+            <>
+              <Header />
+              <Login/>
+            </>
+          } />
+          {/*}
+          <Route path="/admin-login" element={
+            <>
+              <Header />
+              <Login />
+            </>
+          } />
+          */}
+          <Route path="/forgot-password" element={
+            <>
+              <Header />
+              <ForgotPassword />
+            </>
+          } />
+          <Route path="/reset-password" element={
+            <>
+              <Header />
+              <ResetPassword />
+            </>
+          } />
+          <Route path="/admin-dashboard" element={<AdminDashboard />} />
+
 
 
 
