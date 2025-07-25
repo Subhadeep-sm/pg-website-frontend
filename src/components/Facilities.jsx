@@ -45,7 +45,7 @@ const Facilities = () => {
   return (
     <>
       <Header />
-      <div className="bg-[#fff0db] min-h-screen p-6">
+      <div className="bg-[#f2f2f2] min-h-screen p-6">
         <h2 className="text-center text-3xl font-bold mb-4 text-[#152b37]">Facilities</h2>
         <p className="text-center text-[#295061] mb-10">
           Enjoy top-notch amenities designed for comfort and convenience.
@@ -55,10 +55,10 @@ const Facilities = () => {
           {facilitiesData.map((facility, index) => (
             <div
               key={index}
-              className="bg-white rounded-2xl shadow-sm border border-[#d9f1f4] p-6 flex flex-col items-center text-center hover:shadow-md hover:scale-[1.02] transition-all duration-200"
+              className="bg-[#fff0db] rounded-2xl shadow-sm border border-[#8e8271] p-6 flex flex-col items-center text-center hover:shadow-md hover:scale-[1.02] transition-all duration-200"
             >
-              <div className="text-[#948979] mb-4 mt-5">{facility.icon}</div>
-              <p className="text-[#948979] font-medium text-sm mb-5">{facility.title}</p>
+              <div className="text-[#8e8271] mb-4 mt-5">{facility.icon}</div>
+              <p className="text-[#8e8271] font-medium text-sm mb-5">{facility.title}</p>
             </div>
           ))}
         </div>

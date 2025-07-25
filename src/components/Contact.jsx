@@ -56,9 +56,9 @@ const Contact = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 flex flex-col items-center px-4 py-12">
+    <div className="min-h-screen bg-[#f2f2f2]-100 flex flex-col items-center px-4 py-12">
       {/* Form Section */}
-      <div className="bg-white shadow-md rounded-lg p-8 max-w-xl w-full mb-10">
+      <div className="bg-[#fff0db] shadow-md rounded-lg p-8 max-w-xl w-full mb-10">
         <h2 className="text-2xl font-bold mb-6 text-center text-gray-800">Contact Us</h2>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
@@ -69,7 +69,7 @@ const Contact = () => {
               value={formData.name}
               onChange={handleChange}
               required
-              className="mt-1 w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-orange-400"
+              className="mt-1 w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-[#8e8271]-400"
               placeholder="Your Name"
             />
           </div>
@@ -81,26 +81,26 @@ const Contact = () => {
               value={formData.email}
               onChange={handleChange}
               required
-              className="mt-1 w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-orange-400"
+              className="mt-1 w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-[#948979]-400"
               placeholder="your@email.com"
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700">Message</label>
+            <label className="block text-sm font-medium text-[#948979]-700">Message</label>
             <textarea
               name="message"
               rows="4"
               value={formData.message}
               onChange={handleChange}
               required
-              className="mt-1 w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-orange-400"
+              className="mt-1 w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-[#8e8271]-400"
               placeholder="Your message here..."
             ></textarea>
           </div>
           <button
             type="submit"
             disabled={loading}
-            className="w-full bg-orange-500 text-white py-2 px-4 rounded hover:bg-orange-600 transition"
+            className="w-full bg-[#7f7566]-500 text-white py-2 px-4 rounded hover:bg-[#948979]-600 transition"
           >
             {loading ? "Sending..." : "Send Message"}
           </button>
@@ -108,41 +108,43 @@ const Contact = () => {
         {success && (
           <p className="text-green-600 text-center mt-4">
             ✅ Message sent successfully!
-          </p>
+          </p> 
         )}
       </div>
 
       {/* Info Cards Section */}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 max-w-5xl w-full">
-        <div className="bg-white shadow-md rounded-lg p-6 text-center">
+        <div className="bg- [#fff0db] shadow-md rounded-lg p-6 text-center">
           <div className="flex justify-center mb-2">
-            <div className="bg-orange-100 text-orange-500 p-3 rounded-full">
+            <div className="bg-[#8e8271]-100 text-[#8e8271]-500 p-3 rounded-full">
               <FiPhone className="text-2xl" />
             </div>
           </div>
           <h3 className="text-lg font-semibold">Phone No</h3>
-          <p className="text-gray-700 mt-1">+91-89722255220</p>
+          <p className="text-gray-700 mt-1">+91-9088432555</p>
+           <p className="text-gray-700 mt-1">+91-9038227687</p>
+            <p className="text-gray-700 mt-1">+91-9830974784</p>
         </div>
 
-        <div className="bg-white shadow-md rounded-lg p-6 text-center">
+        <div className="bg-[#fff0db] shadow-md rounded-lg p-6 text-center">
           <div className="flex justify-center mb-2">
-            <div className="bg-orange-100 text-orange-500 p-3 rounded-full">
+            <div className="bg-[#8e8271]-100 text-[#8e8271]-500 p-3 rounded-full">
               <FiMail className="text-2xl" />
             </div>
           </div>
           <h3 className="text-lg font-semibold">Email ID</h3>
-          <p className="text-gray-700 mt-1">kamlesvyas@gmail.com</p>
+          <p className="text-gray-700 mt-1">royalpg00@gmail.com</p>
         </div>
 
-        <div className="bg-white shadow-md rounded-lg p-6 text-center">
+        <div className="bg-[#fff0db] shadow-md rounded-lg p-6 text-center">
           <div className="flex justify-center mb-2">
-            <div className="bg-orange-100 text-orange-500 p-3 rounded-full">
+            <div className="bg-[#8e8271]-100 text-[#8e8271]-500 p-3 rounded-full">
               <FiMapPin className="text-2xl" />
             </div>
           </div>
           <h3 className="text-lg font-semibold">Address</h3>
           <p className="text-gray-700 mt-1">
-            House No 1-2, Joshi Vas, Ambli – Bopal Rd, Ambli, Ahmedabad, Gujarat 380058
+           Rose Apartments, Sector V, Bidhannagar, Kolkata, West Bengal 700102
           </p>
         </div>
       </div>
