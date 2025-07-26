@@ -39,15 +39,17 @@ const About = () => {
             <p className="mb-6">
               Enjoy spacious, fully furnished rooms, healthy and tasty homemade food, and reliable 24/7 security. At Royal PG, we maintain top-notch hygiene and service standards—setting us apart from other PGs in the Saltlake area that often fall short on cleanliness and care.
             </p>
-            <button className="bg-[#71685b] hover:bg-[#e4d5b7] hover:text-[#71685b] text-white font-semibold px-5 py-2 rounded">
-              Call Now to Book!
-            </button>
+            <a href="/contact">
+              <button className="bg-[#71685b] hover:bg-[#e4d5b7] hover:text-[#71685b] text-white font-semibold px-5 py-2 rounded">
+                Call Now to Book!
+              </button>
+            </a>
           </div>
 
           {/* WhatsApp Floating Button */}
           <a
             href="https://wa.me/919088432555"
-            className="fixed bottom-6 right-6 bg-[#25D366] hover:bg-[#1db954] text-white px-5 py-2 rounded-full shadow-lg flex items-center gap-2 z-50 transition-colors duration-300"
+            className="fixed bottom-6 right-6 bg-[#005b23] hover:bg-[#1db954] text-white px-5 py-2 rounded-full shadow-lg flex items-center gap-2 z-50 transition-colors duration-300"
             target="_blank"
             rel="noopener noreferrer"
           >
@@ -56,7 +58,7 @@ const About = () => {
               alt="WhatsApp"
               className="w-5 h-5"
             />
-            WhatsApp us
+            <b>WhatsApp us</b>
           </a>
         </div>
       </section>
