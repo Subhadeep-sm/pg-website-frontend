@@ -49,8 +49,8 @@ const About = () => {
 
           {/* WhatsApp Floating Button */}
           <a
-            href="https://wa.me/918972225520"
-            className="fixed bottom-6 right-6 bg-green-500 text-white px-5 py-2 rounded-full shadow-lg flex items-center gap-2 z-50"
+            href="https://wa.me/919088432555"
+            className="fixed bottom-6 right-6 bg-green-600 text-white px-5 py-2 rounded-full shadow-lg flex items-center gap-2 z-50"
             target="_blank"
             rel="noopener noreferrer"
           >
