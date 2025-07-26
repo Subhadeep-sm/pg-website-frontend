@@ -6,6 +6,7 @@ const ManageBuildings = () => {
   const [buildings, setBuildings] = useState([]);
   const [newBuilding, setNewBuilding] = useState("");
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(true); // Loader state
 
   useEffect(() => {
     fetchBuildings();
@@ -13,11 +14,14 @@ const ManageBuildings = () => {
 
   const fetchBuildings = async () => {
     try {
+      setLoading(true); // Start loader
       const res = await axios.get("https://pg-website-backend.onrender.com/api/buildings");
       setBuildings(res.data);
     } catch (err) {
       console.error(err);
       setError("Failed to load buildings");
+    } finally {
+      setLoading(false); // Stop loader
     }
   };
 
@@ -45,7 +49,7 @@ const ManageBuildings = () => {
   };
 
   return (
-    <div className="max-w-6xl mx-auto py-10 px-4 bg-[#DFD0B8] min-h-screen">
+    <div className="max-w-6xl mx-auto py-10 px-4 bg-white min-h-screen mt-[0.8vh]">
       <h2 className="text-4xl font-bold text-center mb-10 text-[#222831]">Manage Buildings</h2>
 
       {/* Add form */}
@@ -67,34 +71,40 @@ const ManageBuildings = () => {
 
       {error && <p className="text-red-500 text-center mb-4">{error}</p>}
 
-      {/* Cards */}
-      <div className="grid gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
-        {buildings.map((building) => (
-          <div
-            key={building.id}
-            className="bg-[#DFD0B8] rounded-2xl shadow-xl overflow-hidden transform transition hover:scale-105"
-          >
-            {/* Background Image */}
+      {/* Loader */}
+      {loading ? (
+        <div className="flex justify-center py-16">
+          <div className="animate-spin rounded-full h-10 w-10 border-t-2 border-b-2 border-[#222831]"></div>
+        </div>
+      ) : (
+        <div className="grid gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+          {buildings.map((building) => (
             <div
-              className="h-56 bg-cover bg-center"
-              style={{
-                backgroundImage: `url('https://cdn-icons-png.flaticon.com/512/24/24914.png')`, // Replace with actual image
-              }}
-            ></div>
+              key={building.id}
+              className="bg-[#DFD0B8] rounded-2xl shadow-xl overflow-hidden transform transition hover:scale-105"
+            >
+              {/* Background Image */}
+              <div
+                className="h-66 bg-cover bg-center"
+                style={{
+                  backgroundImage: `url('https://cdn-icons-png.flaticon.com/512/24/24914.png')`,
+                }}
+              ></div>
 
-            {/* Content */}
-            <div className="p-5 flex items-center justify-between">
-              <h3 className="text-xl font-semibold text-[#393E46]">{building.name}</h3>
-              <button
-                onClick={() => deleteBuilding(building.id)}
-                className="text-red-500 hover:text-red-700 transition"
-              >
-                <Trash size={20} />
-              </button>
+              {/* Content */}
+              <div className="p-5 flex items-center justify-between bg-[#71685b]">
+                <h3 className="text-xl font-semibold text-[#fff]">{building.name}</h3>
+                <button
+                  onClick={() => deleteBuilding(building.id)}
+                  className="text-red-100 hover:text-red-300 transition"
+                >
+                  <Trash size={20} />
+                </button>
+              </div>
             </div>
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 };

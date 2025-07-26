@@ -4,6 +4,7 @@ import axios from "axios";
 const ChangeRent = () => {
   const [rents, setRents] = useState([]);
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     fetchRents();
@@ -11,11 +12,14 @@ const ChangeRent = () => {
 
   const fetchRents = async () => {
     try {
+      setLoading(true);
       const res = await axios.get("https://pg-website-backend.onrender.com/api/rent/all");
       setRents(res.data);
     } catch (err) {
       console.error(err);
       setError("Failed to load rent data");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -40,45 +44,51 @@ const ChangeRent = () => {
   };
 
   return (
-    <div className="max-w-3xl mx-auto py-10 px-4">
-      <h2 className="text-3xl font-semibold text-center mb-6 text-gray-800">Change Rent</h2>
+    <div className="max-w-6xl mx-auto py-15 px-4">
+      <h2 className="text-4xl font-bold text-center mb-10 text-gray-800">Change Rent</h2>
 
       {error && <p className="text-red-600 text-center mb-4">{error}</p>}
 
-      <div className="space-y-4">
-        {rents.map((rent, index) => (
-          <div
-            key={rent.id}
-            className="bg-white border border-gray-200 rounded-xl shadow-md p-5 flex flex-col md:flex-row md:items-center md:justify-between gap-4"
-          >
-            <div className="flex-1">
-              <p className="text-lg font-medium text-gray-700">{rent.roomType}</p>
-              <div className="flex gap-3 mt-2">
-                <input
-                  type="number"
-                  value={rent.lowRent}
-                  onChange={(e) => handleChange(index, "lowRent", e.target.value)}
-                  className="w-24 px-3 py-2 border rounded-md"
-                  placeholder="Low Rent"
-                />
-                <input
-                  type="number"
-                  value={rent.highRent}
-                  onChange={(e) => handleChange(index, "highRent", e.target.value)}
-                  className="w-24 px-3 py-2 border rounded-md"
-                  placeholder="High Rent"
-                />
-              </div>
-            </div>
-            <button
-              onClick={() => updateRent(rent.roomType, rent.lowRent, rent.highRent)}
-              className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition"
+      {loading ? (
+        <div className="flex justify-center py-16">
+          <div className="animate-spin rounded-full h-10 w-10 border-t-2 border-b-2 border-[#222831]"></div>
+        </div>
+      ) : (
+        <div className="flex flex-wrap justify-center gap-6">
+          {rents.map((rent, index) => (
+            <div
+              key={rent.id}
+              className="w-full sm:w-[48%] lg:w-[30%] bg-[#DFD0B8] border border-gray-200 rounded-xl shadow-md p-5 flex flex-col gap-4"
             >
-              Save
-            </button>
-          </div>
-        ))}
-      </div>
+              <div>
+                <p className="text-2xl font-bold text-gray-700">{rent.roomType}</p>
+                <div className="flex gap-3 mt-2">
+                  <input
+                    type="number"
+                    value={rent.lowRent}
+                    onChange={(e) => handleChange(index, "lowRent", e.target.value)}
+                    className="w-24 px-3 py-2 border rounded-md"
+                    placeholder="Low Rent"
+                  />
+                  <input
+                    type="number"
+                    value={rent.highRent}
+                    onChange={(e) => handleChange(index, "highRent", e.target.value)}
+                    className="w-24 px-3 py-2 border rounded-md"
+                    placeholder="High Rent"
+                  />
+                </div>
+              </div>
+              <button
+                onClick={() => updateRent(rent.roomType, rent.lowRent, rent.highRent)}
+                className="bg-[#222831] text-white px-4 py-2 rounded-md hover:bg-[#393E46] transition self-start"
+              >
+                Save
+              </button>
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 };
