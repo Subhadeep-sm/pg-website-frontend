@@ -8,6 +8,7 @@ const Footer = () => {
       
       {/* Info Section */}
       <div className="bg-[#2a2722] text-[#fff] py-10 px-6 md:px-20 grid grid-cols-1 md:grid-cols-3 gap-10 items-start">
+        
         {/* Logo and Name */}
         <div>
           <div className="flex items-center gap-3 mb-3">
@@ -27,7 +28,7 @@ const Footer = () => {
         <div>
           <h3 className="text-xl font-semibold mb-4">Contact Us</h3>
           <p className="mb-2 flex items-center gap-2">
-            <FaMapMarkerAlt /> Rose Apartments, Sector V, Bidhannagar, 
+            <FaMapMarkerAlt /> Rose Apartments, Sector V, Bidhannagar,
           </p>
           <p className="mb-2 pl-6">Kolkata, West Bengal 700102</p>
           <p className="mb-2 flex items-center gap-2">
@@ -35,6 +36,9 @@ const Footer = () => {
           </p>
           <p className="mb-2 flex items-center gap-2">
             <FaPhone /> 9038227687
+          </p>
+          <p className="mb-2 flex items-center gap-2">
+            <FaPhone /> 9830974784
           </p>
           <p className="mb-2 flex items-center gap-2">
             <FaPhone /> 9830974784
@@ -62,7 +66,6 @@ const Footer = () => {
           <p className="text-xs text-gray-400">Made by SSD Solutions</p>
         </div>
       </div>
-
     </footer>
   );
 };

@@ -21,6 +21,7 @@ import AllTenants from './components/AllTenants';
 import BuildingWiseData from './components/BuildingWiseData';
 import ManageBuildings from './components/ManageBuildings';
 import ChangeRent from './components/ChangeRent';
+import AuthenticatedAdmin from './components/AuthenticatedAdmin';
 function App() {
   return (
     <>
@@ -138,7 +139,7 @@ function App() {
             </>
           } />
 
-
+          <Route path="/authenticated-admin" element={<AuthenticatedAdmin />} />
 
 
 

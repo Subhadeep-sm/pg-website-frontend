@@ -7,13 +7,17 @@ const AllTenants = () => {
   const [editingTenant, setEditingTenant] = useState(null);
   const [editFormData, setEditFormData] = useState({});
   const [searchTerm, setSearchTerm] = useState("");
+  const [loading, setLoading] = useState(true); // ⬅️ Loader state
 
   const fetchTenants = async () => {
     try {
+      setLoading(true); // Start loading
       const response = await axios.get("https://pg-website-backend.onrender.com/api/tenants");
       setTenants(response.data);
     } catch (err) {
       console.error("Error fetching tenants:", err);
+    } finally {
+      setLoading(false); // End loading
     }
   };
 
@@ -65,100 +69,125 @@ const AllTenants = () => {
           placeholder="Search by name, contact, or guardian..."
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
-          className="w-full px-3 py-1.5 border border-[#86ccda] rounded-md focus:outline-none focus:ring-2 focus:ring-[#295061]"
+          className="w-full px-3 py-1.5 border border-[#222831] rounded-md focus:outline-none focus:ring-2 focus:ring-[#295061]"
         />
       </div>
 
-      {/* Tenant List */}
-      <div className="grid gap-3">
-        {filteredTenants.map((tenant) => (
-          <div
-            key={tenant.id}
-            className="bg-[#f0f9fb] p-3 rounded-xl shadow-md border border-[#86ccda] cursor-pointer"
-            onClick={() => toggleExpand(tenant.id)}
-          >
-            {/* Header */}
-            <div className="flex justify-between items-center">
-              <div>
-                <h3 className="text-lg font-semibold text-[#152b37]">{tenant.name}</h3>
-                <p className="text-sm text-gray-600 mt-0.5">
-                  📱 {tenant.contactNo} &nbsp;|&nbsp; 🏢 {tenant.building}
-                </p>
+      {/* Loader */}
+      {loading ? (
+        <div className="flex justify-center py-10">
+          <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-[#295061]"></div>
+        </div>
+      ) : (
+        <div className="grid gap-3">
+          {filteredTenants.map((tenant) => (
+            <div
+              key={tenant.id}
+              className="bg-[#DFD0B8] p-3 rounded-xl shadow-md border border-[#393E46] cursor-pointer"
+              onClick={(e) => {
+                if (!editingTenant || editingTenant?.id !== tenant.id) {
+                  toggleExpand(tenant.id);
+                }
+              }}
+            >
+              {/* Header */}
+              <div className="flex justify-between items-center">
+                <div>
+                  <h3 className="text-lg font-semibold text-[#152b37]">{tenant.name}</h3>
+                  <p className="text-sm text-gray-600 mt-0.5">
+                    📱 {tenant.contactNo} &nbsp;|&nbsp; 🏢 {tenant.building}
+                  </p>
+                </div>
+
+                <div className="space-x-2">
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setExpandedId(tenant.id);
+                      setEditingTenant(tenant);
+                      setEditFormData({ ...tenant });
+                    }}
+                    className="bg-yellow-500 text-white px-3 py-1 rounded-md hover:bg-yellow-600 text-sm"
+                  >
+                    Edit
+                  </button>
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleDelete(tenant.id);
+                    }}
+                    className="bg-red-500 text-white px-3 py-1 rounded-md hover:bg-red-600 text-sm"
+                  >
+                    Delete
+                  </button>
+                </div>
               </div>
 
-              <div className="space-x-2">
-                <button
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    setEditingTenant(tenant);
-                    setEditFormData({ ...tenant });
-                  }}
-                  className="bg-yellow-500 text-white px-3 py-1 rounded-md hover:bg-yellow-600 text-sm"
-                >
-                  Edit
-                </button>
-                <button
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    handleDelete(tenant.id);
-                  }}
-                  className="bg-red-500 text-white px-3 py-1 rounded-md hover:bg-red-600 text-sm"
-                >
-                  Delete
-                </button>
-              </div>
+              {/* Expand Section */}
+              {expandedId === tenant.id && (
+                <>
+                  {(!editingTenant || editingTenant.id !== tenant.id) && (
+                    <div className="mt-3 text-[#152b37] space-y-1 text-sm">
+                      <p><strong>Guardian Name:</strong> {tenant.guardianName}</p>
+                      <p><strong>Guardian Contact:</strong> {tenant.guardianContactNo}</p>
+                      <p><strong>Admission Date:</strong> {tenant.admissionDate}</p>
+                      <p><strong>Work Place:</strong> {tenant.workPlace}</p>
+                      <p><strong>Aadhaar No:</strong> {tenant.aadhaarNo}</p>
+                      <p><strong>Room No:</strong> {tenant.roomNo}</p>
+                      <p><strong>Room Type:</strong> {tenant.roomType}</p>
+                    </div>
+                  )}
+
+                  {editingTenant?.id === tenant.id && (
+                    <div className="mt-4 border-t pt-4">
+                      <h4 className="text-base font-semibold text-[#295061] mb-3">Edit Tenant</h4>
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        {[
+                          { label: "Name", key: "name" },
+                          { label: "Contact No", key: "contactNo" },
+                          { label: "Guardian Name", key: "guardianName" },
+                          { label: "Guardian Contact", key: "guardianContactNo" },
+                          { label: "Admission Date", key: "admissionDate", type: "date" },
+                          { label: "Work Place", key: "workPlace" },
+                          { label: "Aadhaar No", key: "aadhaarNo" },
+                          { label: "Building", key: "building" },
+                          { label: "Room No", key: "roomNo" },
+                          { label: "Room Type", key: "roomType" },
+                        ].map(({ label, key, type = "text" }) => (
+                          <div key={key}>
+                            <label className="block text-sm font-medium text-[#152b37] mb-1">{label}</label>
+                            <input
+                              type={type}
+                              value={editFormData[key] || ""}
+                              onChange={(e) =>
+                                setEditFormData({ ...editFormData, [key]: e.target.value })
+                              }
+                              className="w-full px-3 py-1.5 border border-gray-300 rounded-md text-sm"
+                            />
+                          </div>
+                        ))}
+                      </div>
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handleUpdateTenant(tenant.id);
+                        }}
+                        className="mt-4 bg-green-600 text-white px-4 py-2 rounded-md hover:bg-green-700"
+                      >
+                        Save Changes
+                      </button>
+                    </div>
+                  )}
+                </>
+              )}
             </div>
+          ))}
 
-            {/* Expanded Details */}
-            {expandedId === tenant.id && (
-              <div className="mt-3 text-[#152b37] space-y-1 text-sm">
-                <p><strong>Guardian Name:</strong> {tenant.guardianName}</p>
-                <p><strong>Guardian Contact:</strong> {tenant.guardianContactNo}</p>
-                <p><strong>Admission Date:</strong> {tenant.admissionDate}</p>
-                <p><strong>Work Place:</strong> {tenant.workPlace}</p>
-                <p><strong>Aadhaar No:</strong> {tenant.aadhaarNo}</p>
-                <p><strong>Room No:</strong> {tenant.roomNo}</p>
-                <p><strong>Room Type:</strong> {tenant.roomType}</p>
-
-                {/* Edit form */}
-                {editingTenant?.id === tenant.id && (
-                  <div className="mt-4 border-t pt-3 space-y-2">
-                    <h4 className="text-base font-semibold text-[#295061]">Edit Tenant</h4>
-                    {[
-                      "name", "contactNo", "guardianName", "guardianContactNo",
-                      "admissionDate", "workPlace", "aadhaarNo", "building", "roomNo", "roomType"
-                    ].map((field) => (
-                      <input
-                        key={field}
-                        type="text"
-                        placeholder={field}
-                        value={editFormData[field] || ""}
-                        onChange={(e) =>
-                          setEditFormData({ ...editFormData, [field]: e.target.value })
-                        }
-                        className="w-full px-3 py-1 border border-gray-300 rounded-md text-sm"
-                      />
-                    ))}
-                    <button
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        handleUpdateTenant(tenant.id);
-                      }}
-                      className="bg-green-600 text-white px-4 py-1.5 rounded-md hover:bg-green-700"
-                    >
-                      Save Changes
-                    </button>
-                  </div>
-                )}
-              </div>
-            )}
-          </div>
-        ))}
-
-        {filteredTenants.length === 0 && (
-          <p className="text-center text-[#152b37] font-medium">No tenants found.</p>
-        )}
-      </div>
+          {filteredTenants.length === 0 && (
+            <p className="text-center text-[#152b37] font-medium">No tenants found.</p>
+          )}
+        </div>
+      )}
     </div>
   );
 };

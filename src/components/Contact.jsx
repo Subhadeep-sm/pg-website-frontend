@@ -56,10 +56,13 @@ const Contact = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#f2f2f2] flex flex-col items-center px-4 py-12">
-      {/* Form Section */}
-      <div className="bg-[#fff0db] shadow-md rounded-lg p-8 max-w-xl w-full mb-10">
-        <h2 className="text-2xl font-bold mb-6 text-center text-gray-800">Contact Us</h2>
+  <div className=" bg-[#fff] flex flex-col items-center px-4 py-12 mt-[0.8vh] mb-5">
+    <h2 className="text-5xl font-bold text-center mb-8 text-gray-800">Contact Us</h2>
+
+    {/* Flex container for desktop */}
+    <div className="flex flex-col lg:flex-row gap-10 w-full max-w-6xl">
+      {/* Form Section - Left */}
+      <div className="bg-[#fff0db] rounded-lg p-8 w-full lg:w-[70%] shadow-lg shadow-black/20 ">
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
             <label className="block text-sm font-medium text-gray-700">Name</label>
@@ -69,7 +72,7 @@ const Contact = () => {
               value={formData.name}
               onChange={handleChange}
               required
-              className="mt-1 w-full px-4 py-2 border border-black rounded-md  placeholder-white  focus:outline-none focus:ring-2 focus:ring-black font-bold bg-[#948979] text-white"
+              className="mt-1 w-full px-4 py-2 border border-black rounded-md placeholder-white focus:outline-none focus:ring-2 focus:ring-black font-bold bg-[#948979] text-white"
               placeholder="Your Name"
             />
           </div>
@@ -81,75 +84,81 @@ const Contact = () => {
               value={formData.email}
               onChange={handleChange}
               required
-              className="mt-1 w-full px-4 py-2 border border-black rounded-md  placeholder-white  focus:outline-none focus:ring-2 focus:ring-black font-bold bg-[#948979] text-white"
+              className="mt-1 w-full px-4 py-2 border border-black rounded-md placeholder-white focus:outline-none focus:ring-2 focus:ring-black font-bold bg-[#948979] text-white"
               placeholder="your@email.com"
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-[#948979]-700">Message</label>
+            <label className="block text-sm font-medium text-gray-700">Message</label>
             <textarea
               name="message"
               rows="4"
               value={formData.message}
               onChange={handleChange}
               required
-              className="mt-1 w-full px-4 py-2 border border-black rounded-md  placeholder-white  focus:outline-none focus:ring-2 focus:ring-black font-bold bg-[#948979] text-white"
+              maxLength={600}
+              className="resize-none mt-1 h-[20vh] w-full px-4 py-2 border border-black rounded-md placeholder-white focus:outline-none focus:ring-2 focus:ring-black font-bold bg-[#948979] text-white"
               placeholder="Your message here..."
             ></textarea>
           </div>
-          <button
-            type="submit"
-            disabled={loading}
-            className="w-full bg-[#948979]  py-2 px-4 rounded hover:bg-[#f2f2f2] transition"
-          >
-            {loading ? "Sending..." : "Send Message"}
-          </button>
+          <div className="flex justify-center">
+  <button
+    type="submit"
+    disabled={loading}
+    className="w-[50%] bg-[#948979] py-2 px-4 rounded hover:bg-[#f2f2f2] transition text-white font-semibold"
+  >
+    {loading ? "Sending..." : "Send Message"}
+  </button>
+</div>
         </form>
         {success && (
-          <p className="text-green-600 text-center mt-4">
-            ✅ Message sent successfully!
-          </p> 
+          <p className="text-green-600 text-center mt-4">✅ Message sent successfully!</p>
         )}
       </div>
 
-      {/* Info Cards Section */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 max-w-5xl w-full ">
-        <div className="bg-[#fff0db] shadow-md rounded-lg p-6 text-center">
+      {/* Info Cards Section - Right */}
+      <div className="grid grid-cols-1 gap-6 w-full lg:w-[30%]">
+        {/* Phone */}
+        <div className="bg-[#fff0db] shadow-md rounded-lg p-3 text-center">
           <div className="flex justify-center mb-2">
-            <div className="bg-[#8e8271]-100 text-[#8e8271]-500 p-3 rounded-full">
-              <FiPhone className="text-2xl" />
+            <div className="p-3 rounded-full">
+              <FiPhone className="text-2xl text-[#8e8271]" />
             </div>
-          </div >
-          <h3 className="text-lg font-semibold ">Phone No</h3>
+          </div>
+          <h3 className="text-lg font-semibold">Phone No</h3>
           <p className="text-gray-700 mt-1">+91-9088432555</p>
-           <p className="text-gray-700 mt-1">+91-9038227687</p>
-            <p className="text-gray-700 mt-1">+91-9830974784</p>
+          <p className="text-gray-700 mt-1">+91-9038227687</p>
+          <p className="text-gray-700 mt-1">+91-9830974784</p>
         </div>
 
-        <div className="bg-[#fff0db] shadow-md rounded-lg p-6 text-center">
+        {/* Email */}
+        <div className="bg-[#fff0db] shadow-md rounded-lg p-3 text-center">
           <div className="flex justify-center mb-2">
-            <div className="bg-[#8e8271]-100 text-[#8e8271]-500 p-3 rounded-full">
-              <FiMail className="text-2xl" />
+            <div className="p-3 rounded-full">
+              <FiMail className="text-2xl text-[#8e8271]" />
             </div>
           </div>
           <h3 className="text-lg font-semibold">Email ID</h3>
           <p className="text-gray-700 mt-1">royalpg00@gmail.com</p>
         </div>
 
-        <div className="bg-[#fff0db] shadow-md rounded-lg p-6 text-center">
+        {/* Address */}
+        <div className="bg-[#fff0db] shadow-md rounded-lg p-3 text-center">
           <div className="flex justify-center mb-2">
-            <div className="bg-[#8e8271]-100 text-[#8e8271]-500 p-3 rounded-full">
-              <FiMapPin className="text-2xl" />
+            <div className="p-3 rounded-full">
+              <FiMapPin className="text-2xl text-[#8e8271]" />
             </div>
           </div>
           <h3 className="text-lg font-semibold">Address</h3>
           <p className="text-gray-700 mt-1">
-           Rose Apartments, Sector V, Bidhannagar, Kolkata, West Bengal 700102
+            Rose Apartments, Sector V, Bidhannagar, Kolkata, West Bengal 700102
           </p>
         </div>
       </div>
     </div>
-  );
+  </div>
+);
+
 };
 
 export default Contact;
