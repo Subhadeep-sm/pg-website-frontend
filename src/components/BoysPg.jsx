@@ -50,7 +50,7 @@ const [pgData, setPgData] = useState([]);
     const fetchPGData = async () => {
   try {
     const response = await axios.get("https://pg-website-backend.onrender.com/api/rent/all");
-    // console.log("Fetched PG data:", response.data); 
+    console.log("Fetched PG data:", response.data); 
     setPgData(response.data); 
     
     

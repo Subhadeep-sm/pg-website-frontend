@@ -46,7 +46,7 @@ const cards = [
     description: "Manage building records in the system",
     icon: <PiPlusMinusFill size={28} />,
     bgColor: "bg-[#222831] text-white",
-    route: "/change-rent",
+    route: "/manage-buildings",
   },
 ];
 

@@ -7,7 +7,6 @@ const ManageBuildings = () => {
   const [newBuilding, setNewBuilding] = useState("");
   const [error, setError] = useState("");
 
-  // Fetch buildings on load
   useEffect(() => {
     fetchBuildings();
   }, []);
@@ -28,7 +27,7 @@ const ManageBuildings = () => {
         name: newBuilding,
       });
       setNewBuilding("");
-      fetchBuildings(); // refresh
+      fetchBuildings();
     } catch (err) {
       console.error(err);
       setError("Failed to add building");
@@ -38,7 +37,7 @@ const ManageBuildings = () => {
   const deleteBuilding = async (id) => {
     try {
       await axios.delete(`https://pg-website-backend.onrender.com/api/buildings/${id}`);
-      fetchBuildings(); // refresh
+      fetchBuildings();
     } catch (err) {
       console.error(err);
       setError("Failed to delete building");
@@ -46,47 +45,56 @@ const ManageBuildings = () => {
   };
 
   return (
-    <div className="max-w-xl mx-auto py-10">
-      <h2 className="text-2xl font-bold mb-4 text-center">Manage Buildings</h2>
+    <div className="max-w-6xl mx-auto py-10 px-4 bg-[#DFD0B8] min-h-screen">
+      <h2 className="text-4xl font-bold text-center mb-10 text-[#222831]">Manage Buildings</h2>
 
-      <div className="flex mb-6 gap-2">
+      {/* Add form */}
+      <div className="flex max-w-xl mx-auto gap-2 mb-8">
         <input
           type="text"
           value={newBuilding}
           onChange={(e) => setNewBuilding(e.target.value)}
           placeholder="Enter new building name"
-          className="flex-1 px-3 py-2 border border-gray-300 rounded-md"
+          className="flex-1 px-4 py-2 border border-[#948979] rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-[#948979] bg-white text-[#393E46]"
         />
         <button
           onClick={addBuilding}
-          className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700"
+          className="bg-[#222831] text-white px-6 py-2 rounded-lg hover:bg-[#393E46] transition"
         >
           Add
         </button>
       </div>
 
-      {error && <p className="text-red-600 mb-3">{error}</p>}
+      {error && <p className="text-red-500 text-center mb-4">{error}</p>}
 
-      <ul className="space-y-2">
-        {buildings.length === 0 ? (
-          <li className="text-gray-500 text-center">No buildings found.</li>
-        ) : (
-          buildings.map((building) => (
-            <li
-              key={building.id}
-              className="flex justify-between items-center bg-gray-100 px-4 py-2 rounded"
-            >
-              <span>{building.name}</span>
+      {/* Cards */}
+      <div className="grid gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+        {buildings.map((building) => (
+          <div
+            key={building.id}
+            className="bg-[#DFD0B8] rounded-2xl shadow-xl overflow-hidden transform transition hover:scale-105"
+          >
+            {/* Background Image */}
+            <div
+              className="h-56 bg-cover bg-center"
+              style={{
+                backgroundImage: `url('https://cdn-icons-png.flaticon.com/512/24/24914.png')`, // Replace with actual image
+              }}
+            ></div>
+
+            {/* Content */}
+            <div className="p-5 flex items-center justify-between">
+              <h3 className="text-xl font-semibold text-[#393E46]">{building.name}</h3>
               <button
                 onClick={() => deleteBuilding(building.id)}
-                className="text-red-600 hover:text-red-800"
+                className="text-red-500 hover:text-red-700 transition"
               >
-                <Trash size={18} />
+                <Trash size={20} />
               </button>
-            </li>
-          ))
-        )}
-      </ul>
+            </div>
+          </div>
+        ))}
+      </div>
     </div>
   );
 };

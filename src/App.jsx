@@ -20,6 +20,7 @@ import AddTenant from './components/AddTenant';
 import AllTenants from './components/AllTenants';
 import BuildingWiseData from './components/BuildingWiseData';
 import ManageBuildings from './components/ManageBuildings';
+import ChangeRent from './components/ChangeRent';
 function App() {
   return (
     <>
@@ -80,14 +81,14 @@ function App() {
               <Login/>
             </>
           } />
-          {/*}
+          
           <Route path="/admin-login" element={
             <>
               <Header />
               <Login />
             </>
           } />
-          */}
+          
           <Route path="/forgot-password" element={
             <>
               <Header />
@@ -122,13 +123,20 @@ function App() {
             <Footer />
             </>
             } />
-            <Route path="/change-rent" element={
+            <Route path="/manage-buildings" element={
             <>
             <Header />
             <ManageBuildings />
             <Footer />
             </>
             } />
+          <Route path="/change-rent" element={
+            <>
+            <Header />
+            <ChangeRent />
+            <Footer />
+            </>
+          } />
 
 
 
