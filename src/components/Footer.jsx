@@ -1,6 +1,7 @@
 import React from "react";
 import { FaPhone, FaMapMarkerAlt, FaWhatsapp } from "react-icons/fa";
 import royalPgLogo from "../assets/royal-pg-logo.png";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
@@ -15,12 +16,12 @@ const Footer = () => {
             <img 
               src={royalPgLogo} 
               alt="Royal PG Logo" 
-              className="h-8 md:h-12 lg:h-16 w-auto"
+              className="h-16 md:h-18 lg:h-20 w-auto drop-shadow-md drop-shadow-amber-50"
             />
-            <h1 className="text-3xl font-bold">
+            {/* <h1 className="text-3xl font-bold">
               <span className="text-[#fff]">ROYAL</span>
               <span className="text-[#fff]"> PG</span>
-            </h1>
+            </h1> */}
           </div>
         </div>
 
@@ -49,11 +50,10 @@ const Footer = () => {
         <div>
           <h3 className="text-xl font-semibold mb-4">Useful Links</h3>
           <ul className="space-y-2">
-            <li>» Home</li>
-            <li>» Facilities</li>
-            <li>» Boys PG</li>
-            <li>» Girls PG</li>
-            <li>» Contact us</li>
+            <Link to="/facilities"><li>» Facilities</li></Link>
+            <Link to="/BoysPg"><li>» Boys PG</li></Link>
+            <Link to="/GirlsPg"><li>» Girls PG</li></Link>
+            <Link to="/contact"><li>» Contact us</li></Link>
           </ul>
         </div>
       </div>
@@ -63,7 +63,7 @@ const Footer = () => {
         <div className="w-[80vw] mx-auto border-t border-[#444] mb-4"></div>
         <div className="flex flex-col gap-2">
           <p>© 2025 Royal PG. All rights reserved.</p>
-          <p className="text-xs text-gray-400">Made by SSD Solutions</p>
+          <p className="text-xs text-gray-400">Made with ❤️ by SSD Solutions</p>
         </div>
       </div>
     </footer>
