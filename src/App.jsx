@@ -25,7 +25,7 @@ import AuthenticatedAdmin from './components/AuthenticatedAdmin';
 function App() {
   return (
     <>
-      <Router>
+      {/* <Router> */}
         <Routes>
 
 
@@ -146,7 +146,7 @@ function App() {
 
 
         </Routes>
-      </Router>
+      {/* </Router> */}
     </>
   );
 }
