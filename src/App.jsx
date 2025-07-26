@@ -1,105 +1,145 @@
-import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-
-const AllTenants = () => {
-  const [tenants, setTenants] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState('');
-  const navigate = useNavigate();
-
-  const fetchTenants = () => {
-    fetch('https://pg-website-backend.onrender.com/api/tenants')
-      .then((res) => {
-        if (!res.ok) throw new Error('Failed to fetch tenants');
-        return res.json();
-      })
-      .then((data) => {
-        setTenants(data);
-        setLoading(false);
-      })
-      .catch((err) => {
-        setError(err.message);
-        setLoading(false);
-      });
-  };
-
-  useEffect(() => {
-    fetchTenants();
-  }, []);
-
-  const handleDelete = async (id) => {
-    const confirmDelete = window.confirm('Are you sure you want to delete this tenant?');
-    if (!confirmDelete) return;
-
-    try {
-      const res = await fetch(`https://pg-website-backend.onrender.com/api/tenants/${id}`, {
-        method: 'DELETE',
-      });
-
-      if (!res.ok) throw new Error('Delete failed');
-      fetchTenants(); // Refresh after delete
-    } catch (err) {
-      alert('Failed to delete tenant');
-    }
-  };
-
-  const handleEdit = (id) => {
-    navigate(`/edit-tenant/${id}`);
-  };
-
-  if (loading) return <div className="text-center mt-10">Loading tenants...</div>;
-  if (error) return <div className="text-center mt-10 text-red-600">Error: {error}</div>;
-
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Header from './components/Header';
+import Hero from './components/Hero';
+import About from './components/About';
+import Facilities from './components/Facilities';
+import WhyChooseUs from './components/WhyChooseUs';
+import GoogleReviews from './components/GoogleReviews';
+import Footer from './components/Footer';
+import Map from './components/Map';
+import Contact from './components/Contact';
+import BoysPg from './components/BoysPg';
+import GirlsPg from './components/GirlsPg';
+import Admin from './components/Admin';
+import Login from './components/Login';
+import ForgotPassword from './components/ForgotPassword';
+import ResetPassword from './components/ResetPassword';
+import AdminDashboard from './components/AdminDashboard';
+import AddTenant from './components/AddTenant';
+import AllTenants from './components/AllTenants';
+import BuildingWiseData from './components/BuildingWiseData';
+import ManageBuildings from './components/ManageBuildings';
+function App() {
   return (
-    <div className="p-6">
-      <h2 className="text-2xl font-bold mb-4 text-center">All Tenants</h2>
-      <div className="overflow-x-auto">
-        <table className="min-w-full bg-white rounded shadow-md">
-          <thead>
-            <tr className="bg-[#295061] text-white text-sm">
-              <th className="py-2 px-4">Name</th>
-              <th className="py-2 px-4">Contact</th>
-              <th className="py-2 px-4">Guardian</th>
-              <th className="py-2 px-4">Admission</th>
-              <th className="py-2 px-4">Aadhaar</th>
-              <th className="py-2 px-4">Building</th>
-              <th className="py-2 px-4">Room</th>
-              <th className="py-2 px-4">Room Type</th>
-              <th className="py-2 px-4">Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {tenants.map((tenant) => (
-              <tr key={tenant.id} className="text-center border-b hover:bg-[#f0f9fb] text-sm">
-                <td className="py-2 px-4">{tenant.name}</td>
-                <td className="py-2 px-4">{tenant.contactNo}</td>
-                <td className="py-2 px-4">{tenant.guardianName}</td>
-                <td className="py-2 px-4">{tenant.admissionDate}</td>
-                <td className="py-2 px-4">{tenant.aadhaarNo}</td>
-                <td className="py-2 px-4">{tenant.building}</td>
-                <td className="py-2 px-4">{tenant.roomNo}</td>
-                <td className="py-2 px-4">{tenant.roomType}</td>
-                <td className="py-2 px-4">
-                  <button
-                    onClick={() => handleEdit(tenant.id)}
-                    className="bg-blue-500 text-white px-2 py-1 rounded mr-2 hover:bg-blue-600"
-                  >
-                    Edit
-                  </button>
-                  <button
-                    onClick={() => handleDelete(tenant.id)}
-                    className="bg-red-500 text-white px-2 py-1 rounded hover:bg-red-600"
-                  >
-                    Delete
-                  </button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-    </div>
-  );
-};
+    <>
+      <Router>
+        <Routes>
 
-export default AllTenants;
+
+          <Route path="/" element={
+            <>
+              <Header />
+              <Hero />
+              {/* <h1 className="text-4xl text-center mt-10"></h1> */}
+              <About />
+              <WhyChooseUs />
+              <GoogleReviews />
+              <Map />
+              <Footer />
+            </>
+          } />
+
+          <Route path="/aboutus" element={<About />} />
+
+          <Route path="/facilities" element={<Facilities />} />
+          <Route path="/contact" element={
+            <>
+              <Header />
+              <Contact />
+              <Map />
+              <Footer />
+            </>
+          } />
+
+          <Route path="/BoysPg" element={
+            <>
+
+              <Header />
+              <BoysPg />
+              <Footer />
+
+            </>
+
+
+          } />
+          <Route path="/GirlsPg" element={
+            <>
+
+              <Header />
+              <GirlsPg />
+              <Footer />
+
+            </>
+
+
+          } />
+          <Route path="/admin" element={
+            <>
+              <Header />
+              <Login/>
+            </>
+          } />
+          {/*}
+          <Route path="/admin-login" element={
+            <>
+              <Header />
+              <Login />
+            </>
+          } />
+          */}
+          <Route path="/forgot-password" element={
+            <>
+              <Header />
+              <ForgotPassword />
+            </>
+          } />
+          <Route path="/reset-password" element={
+            <>
+              <Header />
+              <ResetPassword />
+            </>
+          } />
+          <Route path="/admin-dashboard" element={<AdminDashboard />} />
+          <Route path="/add-tenant" element={
+            <>
+            <Header />
+            <AddTenant />
+            <Footer />
+            </>
+            } />
+          <Route path="/all-tenants" element={
+            <>
+            <Header />
+            <AllTenants />
+            <Footer />
+            </>
+            } />
+          <Route path="/building-data" element={
+            <>
+            <Header />
+            <BuildingWiseData />
+            <Footer />
+            </>
+            } />
+            <Route path="/change-rent" element={
+            <>
+            <Header />
+            <ManageBuildings />
+            <Footer />
+            </>
+            } />
+
+
+
+
+
+
+
+        </Routes>
+      </Router>
+    </>
+  );
+}
+
+export default App

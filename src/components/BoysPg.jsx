@@ -98,7 +98,7 @@ const [pgData, setPgData] = useState([]);
               <img src={room.image} alt={room.type} className="w-full h-48 object-cover" />
               <div className="p-5" >
                 <h3 className="text-xl font-bold text-gray-800 mb-2">{room.type}</h3>
-                <p className="text-sm text-blue-700 font-semibold mb-4">${pgData[index].lowRent} - ${pgData[index].highRent}</p>
+                <p className="text-sm text-blue-700 font-semibold mb-4">{pgData[index] ? `₹${pgData[index].lowRent} - ₹${pgData[index].highRent}` : "Price not available"}</p>
                 <ul className="text-sm text-gray-600 space-y-1 list-disc list-inside">
                   {room.features.map((feature, i) => (
                     <li key={i}>{feature}</li>
