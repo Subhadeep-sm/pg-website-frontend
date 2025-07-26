@@ -12,23 +12,24 @@ import {
   FaWater,
   FaWifi,
   FaParking,
-  FaVideo, // ✅ Make sure this is included
+  FaVideo,
+  FaSnowflake,
 } from "react-icons/fa";
 import {
   MdOutlineCleaningServices,
   MdTableRestaurant,
+  MdBalcony,
 } from "react-icons/md";
 import { TbToolsKitchen2 } from "react-icons/tb";
-// import { FaVideo } from "react-icons/fa";
 import { BsCupHot } from "react-icons/bs";
 
 const facilitiesData = [
   { icon: <FaBed size={40} />, title: "1,2,3 Sharing Rooms, Personal Bed" },
-  { icon: <TbToolsKitchen2 size={40} />, title: "Home-cooked Veg & Non-Veg Food" },
+  { icon: <FaUtensils size={40} />, title: "Home-cooked Veg & Non-Veg Food" },
   { icon: <BsCupHot size={40} />, title: "Breakfast & Dinner Included" },
   { icon: <FaLock size={40} />, title: "Personal Cupboards with Locks" },
   { icon: <MdTableRestaurant size={40} />, title: "Personal Study Table" },
-  { icon: <FaBath size={40} />, title: "Common Bathroom" },
+  { icon: <FaBath size={40} />, title: "Common/Attached Bathroom" },
   { icon: <FaBlender size={40} />, title: "Refrigerator" },
   { icon: <MdOutlineCleaningServices size={40} />, title: "Washing Machine" },
   { icon: <FaBroom size={40} />, title: "Weekly Housekeeping" },
@@ -37,6 +38,8 @@ const facilitiesData = [
   { icon: <FaWifi size={40} />, title: "High-Speed Wi-Fi Facility" },
   { icon: <FaVideo size={40} />, title: "CCTV Surveillance" },
   { icon: <FaParking size={40} />, title: "Two-Wheeler Parking" },
+  { icon: <MdBalcony size={40} />, title: "Balcony Access" },
+  { icon: <FaSnowflake size={40} />, title: "AC Available" },
 ];
 
 
@@ -48,7 +51,7 @@ const Facilities = () => {
       <div className="bg-[#f2f2f2] min-h-screen p-6">
         <h2 className="text-center text-3xl font-bold mb-4 text-[#152b37]">Facilities</h2>
         <p className="text-center text-[#295061] mb-10">
-          Enjoy top-notch amenities designed for comfort and convenience.
+          Enjoy Royal amenities designed for comfort and convenience.
         </p>
 
         <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 max-w-7xl mx-auto mb-10">

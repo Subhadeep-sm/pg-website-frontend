@@ -4,9 +4,9 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, EffectFade } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/effect-fade";
-import heroimg1 from "../assets/room.jpg";
-import heroimg2 from "../assets/room.jpg";
-import heroimg3 from "../assets/room.jpg";
+import heroimg1 from "../assets/hero.png";
+import heroimg2 from "../assets/hero.png";
+import heroimg3 from "../assets/hero.png";
 
 const slides = [
   {
@@ -26,11 +26,9 @@ const slides = [
   },
 ];
 
-
-
 const Hero = () => {
   return (
-    <div className="w-full h-[90vh] relative overflow-hidden">
+    <div className="w-full h-[60vh] md:h-[70vh] relative overflow-hidden">
       <Swiper
         modules={[Autoplay, EffectFade]}
         effect="fade"
@@ -41,16 +39,16 @@ const Hero = () => {
         {slides.map((slide, index) => (
           <SwiperSlide key={index}>
             <div
-              className="w-full h-full min-h-screen min-w-screen bg-cover bg-center relative  items-center justify-center"
+              className="w-full h-full bg-cover bg-center relative flex items-center justify-center"
               style={{ backgroundImage: `url('${slide.image}')` }}
             >
               <div className="absolute inset-0 bg-black opacity-50"></div>
 
-              <div className="absolute flex flex-col items-center justify-center min-h-screen min-w-screen z-10 text-white ">
-                <h1 className="w-full text-3xl md:text-3xl sm:text-xl text-center font-bold mb-4 drop-shadow-lg text-shadow-md text-shadow-gray-700">
+              <div className="relative z-10 text-white text-center px-4">
+                <h1 className="text-2xl md:text-4xl lg:text-5xl font-bold mb-4 drop-shadow-lg">
                   {slide.title}
                 </h1>
-                <p className="text-md md:text-2xl text-center drop-shadow text-shadow-md text-shadow-gray-700 max-w-[60vw]">
+                <p className="text-sm md:text-lg lg:text-xl drop-shadow-md max-w-4xl mx-auto">
                   {slide.subtitle}
                 </p>
               </div>
