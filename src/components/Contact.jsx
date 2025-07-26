@@ -56,7 +56,7 @@ const Contact = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#f2f2f2]-100 flex flex-col items-center px-4 py-12">
+    <div className="min-h-screen bg-[#f2f2f2] flex flex-col items-center px-4 py-12">
       {/* Form Section */}
       <div className="bg-[#fff0db] shadow-md rounded-lg p-8 max-w-xl w-full mb-10">
         <h2 className="text-2xl font-bold mb-6 text-center text-gray-800">Contact Us</h2>
@@ -69,7 +69,7 @@ const Contact = () => {
               value={formData.name}
               onChange={handleChange}
               required
-              className="mt-1 w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-[#8e8271]-400"
+              className="mt-1 w-full px-4 py-2 border border-black rounded-md  placeholder-white  focus:outline-none focus:ring-2 focus:ring-black font-bold bg-[#948979] text-white"
               placeholder="Your Name"
             />
           </div>
@@ -81,7 +81,7 @@ const Contact = () => {
               value={formData.email}
               onChange={handleChange}
               required
-              className="mt-1 w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-[#948979]-400"
+              className="mt-1 w-full px-4 py-2 border border-black rounded-md  placeholder-white  focus:outline-none focus:ring-2 focus:ring-black font-bold bg-[#948979] text-white"
               placeholder="your@email.com"
             />
           </div>
@@ -93,14 +93,14 @@ const Contact = () => {
               value={formData.message}
               onChange={handleChange}
               required
-              className="mt-1 w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-[#8e8271]-400"
+              className="mt-1 w-full px-4 py-2 border border-black rounded-md  placeholder-white  focus:outline-none focus:ring-2 focus:ring-black font-bold bg-[#948979] text-white"
               placeholder="Your message here..."
             ></textarea>
           </div>
           <button
             type="submit"
             disabled={loading}
-            className="w-full bg-[#7f7566]-500 text-white py-2 px-4 rounded hover:bg-[#948979]-600 transition"
+            className="w-full bg-[#948979]  py-2 px-4 rounded hover:bg-[#f2f2f2] transition"
           >
             {loading ? "Sending..." : "Send Message"}
           </button>
@@ -113,14 +113,14 @@ const Contact = () => {
       </div>
 
       {/* Info Cards Section */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 max-w-5xl w-full">
-        <div className="bg- [#fff0db] shadow-md rounded-lg p-6 text-center">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 max-w-5xl w-full ">
+        <div className="bg-[#fff0db] shadow-md rounded-lg p-6 text-center">
           <div className="flex justify-center mb-2">
             <div className="bg-[#8e8271]-100 text-[#8e8271]-500 p-3 rounded-full">
               <FiPhone className="text-2xl" />
             </div>
-          </div>
-          <h3 className="text-lg font-semibold">Phone No</h3>
+          </div >
+          <h3 className="text-lg font-semibold ">Phone No</h3>
           <p className="text-gray-700 mt-1">+91-9088432555</p>
            <p className="text-gray-700 mt-1">+91-9038227687</p>
             <p className="text-gray-700 mt-1">+91-9830974784</p>

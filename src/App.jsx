@@ -16,7 +16,11 @@ import Login from './components/Login';
 import ForgotPassword from './components/ForgotPassword';
 import ResetPassword from './components/ResetPassword';
 import AdminDashboard from './components/AdminDashboard';
-
+import AddTenant from './components/AddTenant';
+import AllTenants from './components/AllTenants';
+import BuildingWiseData from './components/BuildingWiseData';
+import ManageBuildings from './components/ManageBuildings';
+import ChangeRent from './components/ChangeRent';
 function App() {
   return (
     <>
@@ -77,14 +81,14 @@ function App() {
               <Login/>
             </>
           } />
-          {/*}
+          
           <Route path="/admin-login" element={
             <>
               <Header />
               <Login />
             </>
           } />
-          */}
+          
           <Route path="/forgot-password" element={
             <>
               <Header />
@@ -98,6 +102,41 @@ function App() {
             </>
           } />
           <Route path="/admin-dashboard" element={<AdminDashboard />} />
+          <Route path="/add-tenant" element={
+            <>
+            <Header />
+            <AddTenant />
+            <Footer />
+            </>
+            } />
+          <Route path="/all-tenants" element={
+            <>
+            <Header />
+            <AllTenants />
+            <Footer />
+            </>
+            } />
+          <Route path="/building-data" element={
+            <>
+            <Header />
+            <BuildingWiseData />
+            <Footer />
+            </>
+            } />
+            <Route path="/manage-buildings" element={
+            <>
+            <Header />
+            <ManageBuildings />
+            <Footer />
+            </>
+            } />
+          <Route path="/change-rent" element={
+            <>
+            <Header />
+            <ChangeRent />
+            <Footer />
+            </>
+          } />
 
 
 
