@@ -1,7 +1,7 @@
 import React from "react";
 import primeLocation from "../assets/prime-location.png";
 import cleanRoom from "../assets/clean-room.png";
-import homeCookedFood from "../assets/home-cooked-food.png";
+import homeCookedFood from "../assets/food.png";
 import wifiImage from "../assets/wifi-service.png";
 
 const WhyChooseUs = () => {
