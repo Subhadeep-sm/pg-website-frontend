@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { signInWithPopup, signOut, onAuthStateChanged } from "firebase/auth";
-import { auth, provider } from "../firebase";
+// import { auth, provider } from "../firebase";
 import Admin from "./Admin";
 
 const AuthenticatedAdmin = () => {
@@ -13,17 +13,17 @@ const AuthenticatedAdmin = () => {
     return () => unsubscribe();
   }, []);
 
-  const handleGoogleSignIn = async () => {
-    try {
-      await signInWithPopup(auth, provider);
-    } catch (err) {
-      console.error("Login failed", err);
-    }
-  };
+  // const handleGoogleSignIn = async () => {
+  //   try {
+  //     await signInWithPopup(auth, provider);
+  //   } catch (err) {
+  //     console.error("Login failed", err);
+  //   }
+  // };
 
-  const handleLogout = () => {
-    signOut(auth);
-  };
+  // const handleLogout = () => {
+  //   signOut(auth);
+  // };
 
   if (user) {
     return (
