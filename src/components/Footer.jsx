@@ -41,9 +41,7 @@ const Footer = () => {
           <p className="mb-2 flex items-center gap-2">
             <FaPhone /> 9830974784
           </p>
-          <p className="mb-2 flex items-center gap-2">
-            <FaPhone /> 9830974784
-          </p>
+        
         </div>
 
         {/* Useful Links */}

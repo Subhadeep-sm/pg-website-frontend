@@ -77,11 +77,11 @@ const AllTenants = () => {
           <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-[#295061]"></div>
         </div>
       ) : (
-        <div className="grid gap-3">
+        <div className="grid gap-1">
           {filteredTenants.map((tenant) => (
             <div
               key={tenant.id}
-              className="bg-[#DFD0B8]  p-3 rounded-xl shadow-md border border-[#393E46] cursor-pointer"
+              className="bg-[#DFD0B8]  px-3 py-2.5 rounded-xl shadow-md border border-[#393E46] cursor-pointer"
               onClick={(e) => {
                 if (!editingTenant || editingTenant?.id !== tenant.id) {
                   toggleExpand(tenant.id);
@@ -89,10 +89,10 @@ const AllTenants = () => {
               }}
             >
               {/* Header with vertical centering */}
-              <div className="flex justify-between items-center min-h-[60px]">
-                <div className="flex flex-col justify-center">
-                  <h3 className="text-lg font-semibold text-[#152b37]">{tenant.name}</h3>
-                  <p className="text-sm text-gray-600">
+              <div className="flex justify-between items-center ">
+                <div className="flex flex-col lg:flex-row justify-center w-[60%]">
+                  <h3 className="text-lg font-semibold text-[#152b37] flex-[50%]">{tenant.name}</h3>
+                  <p className="text-sm text-gray-600 flex-[50%] ">
                     📱 {tenant.contactNo} &nbsp;|&nbsp; 🏢 {tenant.building}
                   </p>
                 </div>
