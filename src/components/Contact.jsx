@@ -4,6 +4,7 @@ import { FiPhone, FiMail, FiMapPin } from "react-icons/fi";
 const Contact = () => {
   const [formData, setFormData] = useState({
     name: "",
+    number: "",
     email: "",
     message: "",
   });
@@ -25,6 +26,7 @@ const Contact = () => {
     const payload = {
       access_key: "2f8cb195-cb8b-42f6-ab05-70baa77589bb", // ✅ your Web3Forms access key
       name: formData.name,
+      number: formData.number,
       email: formData.email,
       message: formData.message,
     };
@@ -43,7 +45,7 @@ const Contact = () => {
 
       if (data.success) {
         setSuccess(true);
-        setFormData({ name: "", email: "", message: "" });
+        setFormData({ name: "",number:"", email: "", message: "" });
       } else {
         alert("Submission failed. Try again.");
       }
@@ -77,6 +79,20 @@ const Contact = () => {
             />
           </div>
           <div>
+            <label className="block text-sm font-medium text-gray-700">Contact Number</label>
+            <input
+              type="tel"
+              name="number"
+              value={formData.number}
+              onChange={handleChange}
+              required
+              inputMode="numeric"
+              pattern="[0-9]*"
+              className="mt-1 w-full px-4 py-2 border border-black rounded-md placeholder-white focus:outline-none focus:ring-2 focus:ring-black font-bold bg-[#948979] text-white"
+              placeholder="Your phone number"
+            />
+          </div>
+          <div>
             <label className="block text-sm font-medium text-gray-700">Email</label>
             <input
               type="email"
@@ -105,7 +121,7 @@ const Contact = () => {
   <button
     type="submit"
     disabled={loading}
-    className="w-[50%] bg-[#948979] py-2 px-4 rounded hover:bg-[#f2f2f2] transition text-white font-semibold"
+    className="w-[50%] bg-[#948979] py-2 px-4 rounded hover:bg-[#DFD0B8] transition text-white font-semibold"
   >
     {loading ? "Sending..." : "Send Message"}
   </button>

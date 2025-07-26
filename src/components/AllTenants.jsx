@@ -7,17 +7,17 @@ const AllTenants = () => {
   const [editingTenant, setEditingTenant] = useState(null);
   const [editFormData, setEditFormData] = useState({});
   const [searchTerm, setSearchTerm] = useState("");
-  const [loading, setLoading] = useState(true); // ⬅️ Loader state
+  const [loading, setLoading] = useState(true);
 
   const fetchTenants = async () => {
     try {
-      setLoading(true); // Start loading
+      setLoading(true);
       const response = await axios.get("https://pg-website-backend.onrender.com/api/tenants");
       setTenants(response.data);
     } catch (err) {
       console.error("Error fetching tenants:", err);
     } finally {
-      setLoading(false); // End loading
+      setLoading(false);
     }
   };
 
@@ -62,7 +62,6 @@ const AllTenants = () => {
     <div className="p-4">
       <h2 className="text-2xl font-bold mb-6 text-center text-[#295061]">All Tenants</h2>
 
-      {/* Search */}
       <div className="mb-4 max-w-md mx-auto">
         <input
           type="text"
@@ -73,7 +72,6 @@ const AllTenants = () => {
         />
       </div>
 
-      {/* Loader */}
       {loading ? (
         <div className="flex justify-center py-10">
           <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-[#295061]"></div>
@@ -83,23 +81,23 @@ const AllTenants = () => {
           {filteredTenants.map((tenant) => (
             <div
               key={tenant.id}
-              className="bg-[#DFD0B8] p-3 rounded-xl shadow-md border border-[#393E46] cursor-pointer"
+              className="bg-[#DFD0B8]  p-3 rounded-xl shadow-md border border-[#393E46] cursor-pointer"
               onClick={(e) => {
                 if (!editingTenant || editingTenant?.id !== tenant.id) {
                   toggleExpand(tenant.id);
                 }
               }}
             >
-              {/* Header */}
-              <div className="flex justify-between items-center">
-                <div>
+              {/* Header with vertical centering */}
+              <div className="flex justify-between items-center min-h-[60px]">
+                <div className="flex flex-col justify-center">
                   <h3 className="text-lg font-semibold text-[#152b37]">{tenant.name}</h3>
-                  <p className="text-sm text-gray-600 mt-0.5">
+                  <p className="text-sm text-gray-600">
                     📱 {tenant.contactNo} &nbsp;|&nbsp; 🏢 {tenant.building}
                   </p>
                 </div>
 
-                <div className="space-x-2">
+                <div className="flex items-center space-x-2">
                   <button
                     onClick={(e) => {
                       e.stopPropagation();
@@ -123,7 +121,7 @@ const AllTenants = () => {
                 </div>
               </div>
 
-              {/* Expand Section */}
+              {/* Expanded Info Section */}
               {expandedId === tenant.id && (
                 <>
                   {(!editingTenant || editingTenant.id !== tenant.id) && (
