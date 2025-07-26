@@ -79,26 +79,26 @@ const [pgData, setPgData] = useState([]);
   return (
     <div className="text-gray-800">
       {/* Intro */}
-      <section className="bg-gradient-to-r from-blue-50 to-blue-100 text-center py-16 px-6">
-        <h1 className="text-4xl font-bold mb-4 text-blue-800">Boys PG Accommodations</h1>
-        <p className="text-lg text-gray-700">Find safe, clean, and comfortable Boys PGs near you.</p>
+      <section className="bg-gradient-to-r from-[#f2f2f2]-50 to-[#f2f2f2]-100 text-center py-16 px-6">
+        <h1 className="text-4xl font-bold mb-4 text-[#222831]-800">Boys PG Accommodations</h1>
+        <p className="text-lg text-[#fff0db]-700">Find safe, clean, and Royal Boys PGs near you.</p>
       </section>
 
       
 
       {/* Room Types */}
       <section className="py-12 px-6 bg-gray-50">
-        <h2 className="text-3xl font-semibold text-center text-green-700 mb-10">Room Types</h2>
+        <h2 className="text-3xl font-semibold text-center text-[#635b4f]-700 mb-10">Room Types</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto">
           {rooms.map((room, index) => (
             <div
               key={index}
-              className="bg-white rounded-xl shadow-md hover:shadow-lg transition-all duration-300 overflow-hidden"
+              className="bg-[#faf0e6] rounded-xl shadow-md hover:shadow-lg transition-all duration-300 overflow-hidden"
             >
               <img src={room.image} alt={room.type} className="w-full h-48 object-cover" />
               <div className="p-5" >
                 <h3 className="text-xl font-bold text-gray-800 mb-2">{room.type}</h3>
-                <p className="text-sm text-blue-700 font-semibold mb-4">{pgData[index] ? `₹${pgData[index].lowRent} - ₹${pgData[index].highRent}` : "Price not available"}</p>
+                <p className="text-sm text-red-700 font-semibold mb-4">{pgData[index] ? `₹${pgData[index].lowRent} - ₹${pgData[index].highRent}` : "Price not available"}</p>
                 <ul className="text-sm text-gray-600 space-y-1 list-disc list-inside">
                   {room.features.map((feature, i) => (
                     <li key={i}>{feature}</li>
@@ -110,8 +110,8 @@ const [pgData, setPgData] = useState([]);
         </div>
       </section>
       {/* Buildings */}
-      <section className="py-12 px-6 bg-white">
-        <h2 className="text-3xl font-semibold text-center text-orange-600 mb-10">Available Buildings</h2>
+      <section className="py-12 px-6 bg-[#fff]">
+        <h2 className="text-3xl font-semibold text-center text-[#635b4f]-600 mb-10">Available Buildings</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto">
           {buildings.map((building, index) => (
             <div
@@ -119,7 +119,7 @@ const [pgData, setPgData] = useState([]);
               className="rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-transform hover:scale-105 duration-300"
             >
               <img src={building.image} alt={building.name} className="w-full h-48 object-cover" />
-              <div className="p-4 bg-gray-50 text-center">
+              <div className="p-4 bg-[#faf0e6]-50 text-center">
                 <h3 className="text-xl font-bold">{building.name}</h3>
               </div>
             </div>

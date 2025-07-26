@@ -1,8 +1,8 @@
 import React from "react";
-import room1 from "../assets/room.jpg";
-import room2 from "../assets/room.jpg";
-import room3 from "../assets/room.jpg";
-import room4 from "../assets/room.jpg";
+import primeLocation from "../assets/prime-location.png";
+import cleanRoom from "../assets/clean-room.png";
+import homeCookedFood from "../assets/home-cooked-food.png";
+import wifiImage from "../assets/wifi-service.png";
 
 const WhyChooseUs = () => {
   return (
@@ -12,10 +12,10 @@ const WhyChooseUs = () => {
           
           {/* IMAGE GRID WITH CENTER CIRCLE */}
           <div className="flex-1 relative grid grid-cols-2 grid-rows-2 gap-4">
-            <img src={room1} alt="Room 1" className="rounded-lg shadow-lg" />
-            <img src={room2} alt="Room 2" className="rounded-lg shadow-lg" />
-            <img src={room3} alt="Room 3" className="rounded-lg shadow-lg" />
-            <img src={room4} alt="Room 4" className="rounded-lg shadow-lg" />
+            <img src={primeLocation} alt="Prime Location - Near Educational Institutes" className="rounded-lg shadow-lg" />
+            <img src={cleanRoom} alt="Clean and Hygienic Rooms" className="rounded-lg shadow-lg" />
+            <img src={homeCookedFood} alt="Home Cooked Healthy Meals" className="rounded-lg shadow-lg" />
+            <img src={wifiImage} alt="High Speed WiFi Service" className="rounded-lg shadow-lg" />
             
             {/* Center Circle */}
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10">
