@@ -4,9 +4,11 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "../firebase";
 
 const ProtectedRoute = ({ children }) => {
-  const [user, loading] = useAuthState(auth);
+  const [user, loading, error] = useAuthState(auth);
 
-  if (loading) return <div className="text-center mt-20">Loading...</div>;
+  if (loading) {
+    return <div className="text-center mt-20">Loading...</div>;
+  }
 
   return user ? children : <Navigate to="/admin" replace />;
 };
