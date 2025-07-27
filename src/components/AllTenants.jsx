@@ -81,7 +81,7 @@ const AllTenants = () => {
           {filteredTenants.map((tenant) => (
             <div
               key={tenant.id}
-              className="bg-[#DFD0B8]  px-3 py-2.5 rounded-xl shadow-md border border-[#393E46] cursor-pointer"
+              className="bg-[#fff0db]  px-3 py-2.5 rounded-xl shadow-md border border-[#393E46] cursor-pointer"
               onClick={(e) => {
                 if (!editingTenant || editingTenant?.id !== tenant.id) {
                   toggleExpand(tenant.id);
@@ -91,9 +91,9 @@ const AllTenants = () => {
               {/* Header with vertical centering */}
               <div className="flex justify-between items-center ">
                 <div className="flex flex-col lg:flex-row justify-center w-[60%]">
-                  <h3 className="text-lg font-semibold text-[#152b37] flex-[50%]">{tenant.name}</h3>
-                  <p className="text-sm text-gray-600 flex-[50%] ">
-                    📱 {tenant.contactNo} &nbsp;|&nbsp; 🏢 {tenant.building}
+                  <h3 className="text-lg font-bold text-[#152b37] flex-[50%]">{tenant.name}</h3>
+                  <p className="font-bold text-sm text-gray-600 flex-[50%] ">
+                    📞 {tenant.contactNo} &nbsp;|&nbsp; 🏠 {tenant.building}
                   </p>
                 </div>
 
@@ -105,7 +105,7 @@ const AllTenants = () => {
                       setEditingTenant(tenant);
                       setEditFormData({ ...tenant });
                     }}
-                    className="bg-yellow-500 text-white px-3 py-1 rounded-md hover:bg-yellow-600 text-sm"
+                    className="bg-yellow-600 text-white px-3 py-1 rounded-md hover:bg-yellow-600 text-sm"
                   >
                     Edit
                   </button>
@@ -114,7 +114,7 @@ const AllTenants = () => {
                       e.stopPropagation();
                       handleDelete(tenant.id);
                     }}
-                    className="bg-red-500 text-white px-3 py-1 rounded-md hover:bg-red-600 text-sm"
+                    className="bg-red-600 text-white px-3 py-1 rounded-md hover:bg-red-600 text-sm"
                   >
                     Delete
                   </button>
@@ -125,21 +125,27 @@ const AllTenants = () => {
               {expandedId === tenant.id && (
                 <>
                   {(!editingTenant || editingTenant.id !== tenant.id) && (
-                    <div className="mt-3 text-[#152b37] space-y-1 text-sm">
-                      <p><strong>Guardian Name:</strong> {tenant.guardianName}</p>
-                      <p><strong>Guardian Contact:</strong> {tenant.guardianContactNo}</p>
-                      <p><strong>Admission Date:</strong> {tenant.admissionDate}</p>
-                      <p><strong>Work Place:</strong> {tenant.workPlace}</p>
-                      <p><strong>Aadhaar No:</strong> {tenant.aadhaarNo}</p>
-                      <p><strong>Room No:</strong> {tenant.roomNo}</p>
-                      <p><strong>Room Type:</strong> {tenant.roomType}</p>
+                    <div className="mt-3 font-semibold text-[#152b37] text-sm grid grid-cols-1 md:grid-cols-2 gap-y-2 gap-x-6">
+                      <div className="space-y-1">
+                        <p><strong>Guardian Name:</strong> {tenant.guardianName}</p>
+                        <p><strong>Guardian Contact:</strong> {tenant.guardianContactNo}</p>
+                        <p><strong>Admission Date:</strong> {tenant.admissionDate}</p>
+                        <p><strong>Work Place:</strong> {tenant.workPlace}</p>
+                      </div>
+
+                      <div className="space-y-1">
+                        <p><strong>Aadhaar No:</strong> {tenant.aadhaarNo}</p>
+                        <p><strong>Room No:</strong> {tenant.roomNo}</p>
+                        <p><strong>Room Type:</strong> {tenant.roomType}</p>
+                      </div>
                     </div>
+
                   )}
 
                   {editingTenant?.id === tenant.id && (
                     <div className="mt-4 border-t pt-4">
                       <h4 className="text-base font-semibold text-[#295061] mb-3">Edit Tenant</h4>
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 ">
                         {[
                           { label: "Name", key: "name" },
                           { label: "Contact No", key: "contactNo" },
@@ -160,7 +166,7 @@ const AllTenants = () => {
                               onChange={(e) =>
                                 setEditFormData({ ...editFormData, [key]: e.target.value })
                               }
-                              className="w-full px-3 py-1.5 border border-gray-300 rounded-md text-sm"
+                              className="w-full px-3 py-1.5 border-2 border-[#948979] rounded-md text-sm"
                             />
                           </div>
                         ))}

@@ -1,38 +1,72 @@
-import React from "react";
+import React, { useState } from "react";
+import { sendPasswordResetEmail } from "firebase/auth";
+import { auth } from "../firebase";
 import { useNavigate } from "react-router-dom";
 
 const ForgotPassword = () => {
+  const [email, setEmail] = useState("");
+  const [message, setMessage] = useState("");
+  const [error, setError] = useState("");
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Normally, you'd send OTP/email; here we redirect
-    navigate("/reset-password");
+  const handleResetPassword = async () => {
+    setError("");
+    setMessage("");
+
+    if (!email) {
+      setError("Please enter your email address.");
+      return;
+    }
+
+    try {
+      await sendPasswordResetEmail(auth, email);
+      setMessage("Password reset email sent! Check your inbox.");
+    } catch (err) {
+      if (err.code === "auth/user-not-found") {
+        setError("No user found with this email.");
+      } else if (err.code === "auth/invalid-email") {
+        setError("Please enter a valid email address.");
+      } else {
+        setError(err.message);
+      }
+    }
   };
 
   return (
-    <div className="flex items-center justify-center h-screen bg-[#DFD0B8]">
-      <form
-        onSubmit={handleSubmit}
-        className="bg-[#393E46] text-[#DFD0B8] p-8 rounded-2xl shadow-xl w-96"
-      >
-        <h2 className="text-2xl font-bold mb-4 text-center">Forgot Password</h2>
-        <p className="mb-6 text-sm text-center text-[#948979]">
-          Enter your registered email to reset your password.
-        </p>
-        <input
-          type="email"
-          required
-          placeholder="you@example.com"
-          className="w-full px-4 py-2 rounded bg-[#222831] text-[#DFD0B8] mb-4 focus:outline-none"
-        />
+    <div className="min-h-screen flex items-center justify-center bg-[#F5F5F5] px-4">
+      <div className="bg-[#DFD0B8] rounded-xl shadow-2xl w-full max-w-md p-8 text-center">
+        <h2 className="text-3xl font-bold text-[#222831] mb-6">
+          Reset Password
+        </h2>
+
+        {message && <p className="text-green-600 mb-4">{message}</p>}
+        {error && <p className="text-red-600 mb-4">{error}</p>}
+
+        <div className="mb-4 text-left">
+          <label className="text-sm text-gray-700">Email Address</label>
+          <input
+            type="email"
+            placeholder="Enter your registered email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            className="w-full px-4 py-2 mt-1 border border-gray-300 rounded-lg bg-transparent text-gray-800 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#222831]"
+          />
+        </div>
+
         <button
-          type="submit"
-          className="w-full bg-[#948979] hover:bg-[#DFD0B8] hover:text-[#222831] text-[#222831] font-semibold py-2 rounded"
+          onClick={handleResetPassword}
+          className="w-full bg-[#222831] text-white font-semibold px-6 py-2 rounded-lg hover:bg-[#393E46] transition mb-4"
         >
-          Continue
+          Send Reset Link
         </button>
-      </form>
+
+        <p
+          onClick={() => navigate("/admin")}
+          className="text-blue-600 text-sm cursor-pointer hover:underline"
+        >
+          Back to Login
+        </p>
+      </div>
     </div>
   );
 };

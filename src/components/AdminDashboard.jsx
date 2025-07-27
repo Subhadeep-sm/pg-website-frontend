@@ -1,5 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import { signOut } from "firebase/auth";
+import { auth } from "../firebase"; // make sure this path is correct
 import Header from "./Header";
 import Footer from "./Footer";
 import {
@@ -53,6 +55,15 @@ const cards = [
 const AdminDashboard = () => {
   const navigate = useNavigate();
 
+  const handleLogout = async () => {
+    try {
+      await signOut(auth);
+      navigate("/admin"); // redirect to login after logout
+    } catch (error) {
+      console.error("Logout failed:", error);
+    }
+  };
+
   const handleDownload = async () => {
     try {
       const response = await fetch(
@@ -92,10 +103,10 @@ const AdminDashboard = () => {
             <h1 className="text-xl font-bold text-[#2f2804] md:text-2xl">
               Welcome, Admin...
             </h1>
-            
           </div>
           <div>
             <button
+              onClick={handleLogout}
               className="bg-[#393E46] hover:bg-[#ff8080] hover:text-[#222831] text-white font-semibold py-2 px-4 rounded"
             >
               <MdLogout className="inline mr-1" /> Logout
