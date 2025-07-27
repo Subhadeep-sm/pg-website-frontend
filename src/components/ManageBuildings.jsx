@@ -6,7 +6,8 @@ const ManageBuildings = () => {
   const [buildings, setBuildings] = useState([]);
   const [newBuilding, setNewBuilding] = useState("");
   const [error, setError] = useState("");
-  const [loading, setLoading] = useState(true); // Loader state
+  const [loading, setLoading] = useState(true); // Loader for data fetch
+  const [adding, setAdding] = useState(false);  // Loader for add button
 
   useEffect(() => {
     fetchBuildings();
@@ -14,19 +15,21 @@ const ManageBuildings = () => {
 
   const fetchBuildings = async () => {
     try {
-      setLoading(true); // Start loader
+      setLoading(true);
       const res = await axios.get("https://pg-website-backend.onrender.com/api/buildings");
       setBuildings(res.data);
     } catch (err) {
       console.error(err);
       setError("Failed to load buildings");
     } finally {
-      setLoading(false); // Stop loader
+      setLoading(false);
     }
   };
 
   const addBuilding = async () => {
+    if (!newBuilding.trim()) return; // Prevent adding empty strings
     try {
+      setAdding(true);
       await axios.post("https://pg-website-backend.onrender.com/api/buildings", {
         name: newBuilding,
       });
@@ -35,6 +38,8 @@ const ManageBuildings = () => {
     } catch (err) {
       console.error(err);
       setError("Failed to add building");
+    } finally {
+      setAdding(false);
     }
   };
 
@@ -63,15 +68,20 @@ const ManageBuildings = () => {
         />
         <button
           onClick={addBuilding}
-          className="bg-[#222831] text-white px-6 py-2 rounded-lg hover:bg-[#393E46] transition"
+          disabled={adding}
+          className="bg-[#222831] text-white px-6 py-2 rounded-lg hover:bg-[#393E46] transition flex items-center justify-center min-w-[90px]"
         >
-          Add
+          {adding ? (
+            <div className="animate-spin rounded-full h-5 w-5 border-t-2 border-b-2 border-white"></div>
+          ) : (
+            "Add"
+          )}
         </button>
       </div>
 
       {error && <p className="text-red-500 text-center mb-4">{error}</p>}
 
-      {/* Loader */}
+      {/* Loader while fetching buildings */}
       {loading ? (
         <div className="flex justify-center py-16">
           <div className="animate-spin rounded-full h-10 w-10 border-t-2 border-b-2 border-[#222831]"></div>
