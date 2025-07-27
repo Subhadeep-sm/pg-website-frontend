@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useState } from "react"; // ✅ Add useState
 import { useNavigate } from "react-router-dom";
 import { signOut } from "firebase/auth";
-import { auth } from "../firebase"; // make sure this path is correct
+import { auth } from "../firebase";
 import Header from "./Header";
 import Footer from "./Footer";
 import {
@@ -54,11 +54,12 @@ const cards = [
 
 const AdminDashboard = () => {
   const navigate = useNavigate();
+  const [downloading, setDownloading] = useState(false); // ✅ Loader state
 
   const handleLogout = async () => {
     try {
       await signOut(auth);
-      navigate("/admin"); // redirect to login after logout
+      navigate("/admin");
     } catch (error) {
       console.error("Logout failed:", error);
     }
@@ -66,6 +67,7 @@ const AdminDashboard = () => {
 
   const handleDownload = async () => {
     try {
+      setDownloading(true); // ✅ Start loader
       const response = await fetch(
         "https://pg-website-backend.onrender.com/api/tenants/download",
         {
@@ -91,6 +93,8 @@ const AdminDashboard = () => {
     } catch (error) {
       console.error("Download error:", error);
       alert("Failed to download file");
+    } finally {
+      setDownloading(false); 
     }
   };
 
@@ -129,13 +133,19 @@ const AdminDashboard = () => {
             </div>
           ))}
 
-          {/* Download Card */}
+          {/* ✅ Download Card with loader */}
           <div
-            className="flex items-center gap-4 p-4 h-[18vh] rounded-xl shadow-md cursor-pointer transition hover:scale-105 bg-[#393E46] text-white"
-            onClick={handleDownload}
+            className={`flex items-center gap-4 p-4 h-[18vh] rounded-xl shadow-md transition hover:scale-105 bg-[#393E46] text-white ${
+              downloading ? "cursor-not-allowed opacity-60" : "cursor-pointer"
+            }`}
+            onClick={!downloading ? handleDownload : undefined}
           >
             <div>
-              <FaDownload size={28} />
+              {downloading ? (
+                <div className="animate-spin rounded-full h-6 w-6 border-t-2 border-b-2 border-white"></div>
+              ) : (
+                <FaDownload size={28} />
+              )}
             </div>
             <div>
               <h2 className="font-bold text-lg">Download Data</h2>
