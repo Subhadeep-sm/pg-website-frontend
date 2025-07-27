@@ -43,13 +43,13 @@ const ForgotPassword = () => {
         {error && <p className="text-red-600 mb-4">{error}</p>}
 
         <div className="mb-4 text-left">
-          <label className="text-sm text-gray-700 font-semibold">Email Address</label>
+          <label className="text-sm text-gray-700">Email Address</label>
           <input
             type="email"
             placeholder="Enter your registered email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="w-full px-4 py-2 mt-1 border border-black rounded-lg bg-transparent text-gray-800 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#222831]"
+            className="w-full px-4 py-2 mt-1 border border-gray-300 rounded-lg bg-transparent text-gray-800 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#222831]"
           />
         </div>
 
@@ -62,7 +62,7 @@ const ForgotPassword = () => {
 
         <p
           onClick={() => navigate("/admin")}
-          className="text-black text-sm cursor-pointer hover:underline"
+          className="text-blue-600 text-sm cursor-pointer hover:underline"
         >
           Back to Login
         </p>
