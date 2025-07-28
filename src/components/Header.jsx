@@ -65,7 +65,7 @@ const Header = () => {
         </button>
       </div>
 
-      {/* Sidebar */}
+       {/* Sidebar (from right) */}
       <div
         className={`fixed top-0 right-0 h-full w-[70%] sm:w-[60%] bg-[#464b53] text-white p-6 z-50 transition-transform duration-300 ease-in-out transform ${
           menuOpen ? "translate-x-0" : "translate-x-full"

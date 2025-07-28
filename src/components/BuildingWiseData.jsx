@@ -1,122 +1,140 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { toast } from "react-toastify";
 
-const AllTenants = () => {
+const BuildingWiseData = () => {
+  const [buildings, setBuildings] = useState([]);
+  const [selectedBuilding, setSelectedBuilding] = useState("");
   const [tenants, setTenants] = useState([]);
-  const [expandedId, setExpandedId] = useState(null);
-  const [editingTenant, setEditingTenant] = useState(null);
-  const [editFormData, setEditFormData] = useState({});
-  const [searchTerm, setSearchTerm] = useState("");
-  const [loading, setLoading] = useState(true);
-  const [isSaving, setIsSaving] = useState(false);
-  const [deletingId, setDeletingId] = useState(null);
-
-  const fetchTenants = async () => {
-    try {
-      setLoading(true);
-      const response = await axios.get("https://pg-website-backend.onrender.com/api/tenants");
-      setTenants(response.data);
-    } catch (err) {
-      console.error("Error fetching tenants:", err);
-    } finally {
-      setLoading(false);
-    }
-  };
+  const [expandedTenantId, setExpandedTenantId] = useState(null);
+  const [editingTenantId, setEditingTenantId] = useState(null);
+  const [editData, setEditData] = useState({});
+  const [loading, setLoading] = useState(false);
+  const [deletingTenantId, setDeletingTenantId] = useState(null);
+  const [savingTenantId, setSavingTenantId] = useState(null);
 
   useEffect(() => {
-    fetchTenants();
+    axios
+      .get("https://pg-website-backend.onrender.com/api/buildings")
+      .then((res) => setBuildings(res.data))
+      .catch((err) => console.error("Error fetching buildings:", err));
   }, []);
 
-  const toggleExpand = (id) => {
-    if (editingTenant && editingTenant.id === id) return; // Prevent collapse while editing
-    setExpandedId(expandedId === id ? null : id);
-    setEditingTenant(null);
-  };
+  const handleBuildingChange = (e) => {
+    const buildingName = e.target.value;
+    setSelectedBuilding(buildingName);
+    setTenants([]);
+    setEditingTenantId(null);
+    setExpandedTenantId(null);
+    if (!buildingName) return;
 
-  const handleDelete = async (id) => {
-    try {
-      setDeletingId(id);
-      await axios.delete(`https://pg-website-backend.onrender.com/api/tenants/${id}`);
-      fetchTenants();
-    } catch (err) {
-      console.error("Error deleting tenant:", err);
-    } finally {
-      setDeletingId(null);
-    }
+    setLoading(true);
+    axios
+      .get(
+        `https://pg-website-backend.onrender.com/api/tenants/by-building/${encodeURIComponent(
+          buildingName
+        )}`
+      )
+      .then((res) => setTenants(res.data))
+      .catch((err) => console.error("Error fetching tenants:", err))
+      .finally(() => setLoading(false));
   };
 
   const handleEdit = (tenant) => {
-    setExpandedId(tenant.id); // Make sure it's expanded
-    setEditingTenant(tenant);
-    setEditFormData({ ...tenant });
+    setExpandedTenantId(tenant.id);
+    setEditingTenantId(tenant.id);
+    setEditData({ ...tenant });
   };
 
-  const handleUpdateTenant = async (id) => {
-    try {
-      setIsSaving(true);
-      await axios.put(`https://pg-website-backend.onrender.com/api/tenants/${id}`, editFormData);
-      setEditingTenant(null);
-      fetchTenants();
-    } catch (err) {
-      console.error("Error updating tenant:", err);
-    } finally {
-      setIsSaving(false);
-    }
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setEditData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const filteredTenants = tenants.filter((tenant) => {
-    const lowerSearch = searchTerm.toLowerCase();
-    return (
-      tenant.name.toLowerCase().includes(lowerSearch) ||
-      tenant.contactNo.toLowerCase().includes(lowerSearch) ||
-      tenant.guardianName.toLowerCase().includes(lowerSearch)
-    );
-  });
+  const handleSave = (id) => {
+    setSavingTenantId(id);
+    axios
+      .put(`https://pg-website-backend.onrender.com/api/tenants/${id}`, editData)
+      .then(() => {
+        const updated = tenants.map((t) => (t.id === id ? editData : t));
+        setTenants(updated);
+        setEditingTenantId(null);
+        toast.success("Tenant updated successfully");
+      })
+      .catch((err) => {
+        console.error("Update failed:", err);
+        toast.error("Failed to update tenant");
+      })
+      .finally(() => setSavingTenantId(null));
+  };
+
+  const handleDelete = (id) => {
+    if (!window.confirm("Are you sure you want to delete this tenant?")) return;
+    setDeletingTenantId(id);
+    axios
+      .delete(`https://pg-website-backend.onrender.com/api/tenants/${id}`)
+      .then(() => {
+        const updated = tenants.filter((t) => t.id !== id);
+        setTenants(updated);
+        toast.success("Tenant deleted");
+      })
+      .catch((err) => {
+        console.error("Delete failed:", err);
+        toast.error("Failed to delete tenant");
+      })
+      .finally(() => setDeletingTenantId(null));
+  };
 
   return (
-    <div className="p-4 mt-[13vh]">
-      <h2 className="text-3xl font-bold mb-6 text-center text-[#295061]">All Tenants</h2>
+    <div className="p-6 bg-gray-50 min-h-screen mt-[15vh]">
+      <h2 className="text-3xl font-bold mb-6 text-gray-800">Building​-wise Data</h2>
 
-      <div className="mb-4 max-w-md mx-auto">
-        <input
-          type="text"
-          placeholder="Search by name, contact, or guardian..."
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-          className="w-full px-3 py-1.5 border border-[#222831] rounded-md focus:outline-none focus:ring-2 focus:ring-[#295061]"
-        />
-      </div>
+      <select
+        onChange={handleBuildingChange}
+        value={selectedBuilding}
+        className="p-3 border rounded-lg shadow mb-6"
+      >
+        <option value="">Select a Building</option>
+        {buildings.map((b) => (
+          <option key={b.id} value={b.name}>
+            {b.name}
+          </option>
+        ))}
+      </select>
 
       {loading ? (
-        <div className="flex justify-center py-10">
-          <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-[#295061]"></div>
-        </div>
-      ) : (
-        <div className="grid gap-1">
-          {filteredTenants.map((tenant) => (
+        <p>Loading tenants...</p>
+      ) : tenants.length > 0 ? (
+        <div className="space-y-4">
+          {tenants.map((tenant) => (
             <div
               key={tenant.id}
-              className="bg-[#fff0db] px-3 py-2.5 rounded-xl shadow-md border border-[#393E46] cursor-pointer"
-              onClick={() => {
-                if (editingTenant?.id === tenant.id) return;
-                toggleExpand(tenant.id);
-              }}
+              className="bg-[#FFF1DC] px-3 py-2 rounded-xl shadow-md border border-[#393E46]"
             >
-              <div className="flex justify-between items-center">
-                <div className="flex flex-col lg:flex-row justify-center w-[60%]">
-                  <h3 className="text-lg font-bold text-[#152b37] flex-[50%]">{tenant.name}</h3>
-                  <p className="font-bold text-sm text-gray-600 flex-[50%]">
-                    📞 {tenant.contactNo} &nbsp;|&nbsp; 🏠 {tenant.building}
+              <div
+                className="flex justify-between items-center cursor-pointer"
+                onClick={() => {
+                  if (editingTenantId === tenant.id) return;
+                  setExpandedTenantId(
+                    expandedTenantId === tenant.id ? null : tenant.id
+                  );
+                }}
+              >
+                <div className="flex flex-col md:flex-row  w-full md:w-[60%] ">
+                  <h3 className="text-lg font-semibold text-[#152B37] w-[50%]">
+                    {tenant.name}
+                  </h3>
+                  <p className="text-xs/tight lg:text-xs/loose text-gray-700 font-bold ">
+                    {tenant.contactNo} | {tenant.building} ({tenant.roomNo})
                   </p>
                 </div>
-
-                <div className="flex items-center space-x-2">
+                <div className="flex gap-2 z-10">
                   <button
                     onClick={(e) => {
                       e.stopPropagation();
                       handleEdit(tenant);
                     }}
-                    className="bg-yellow-600 text-white px-3 py-1 rounded-md hover:bg-yellow-600 text-sm"
+                    className="bg-yellow-600 text-white px-3 py-1 rounded hover:bg-yellow-700"
                   >
                     Edit
                   </button>
@@ -125,11 +143,37 @@ const AllTenants = () => {
                       e.stopPropagation();
                       handleDelete(tenant.id);
                     }}
-                    className="bg-red-600 text-white px-3 py-1 rounded-md hover:bg-red-700 text-sm flex items-center justify-center min-w-[75px]"
-                    disabled={deletingId === tenant.id}
+                    disabled={deletingTenantId === tenant.id}
+                    className={`text-white px-3 py-1 rounded flex items-center gap-2 ${
+                      deletingTenantId === tenant.id
+                        ? "bg-red-400 cursor-not-allowed"
+                        : "bg-red-600 hover:bg-red-700"
+                    }`}
                   >
-                    {deletingId === tenant.id ? (
-                      <div className="h-4 w-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                    {deletingTenantId === tenant.id ? (
+                      <>
+                        <svg
+                          className="animate-spin h-4 w-4 text-white"
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                        >
+                          <circle
+                            className="opacity-25"
+                            cx="12"
+                            cy="12"
+                            r="10"
+                            stroke="currentColor"
+                            strokeWidth="4"
+                          ></circle>
+                          <path
+                            className="opacity-75"
+                            fill="currentColor"
+                            d="M4 12a8 8 0 018-8v4l3-3-3-3v4a8 8 0 00-8 8h4z"
+                          ></path>
+                        </svg>
+                        Deleting...
+                      </>
                     ) : (
                       "Delete"
                     )}
@@ -137,80 +181,112 @@ const AllTenants = () => {
                 </div>
               </div>
 
-              {expandedId === tenant.id && (
-                <>
-                  {(!editingTenant || editingTenant.id !== tenant.id) && (
-                    <div className="mt-3 font-semibold text-[#152b37] text-sm grid grid-cols-1 md:grid-cols-2 gap-y-2 gap-x-6">
-                      <div className="space-y-1">
-                        <p><strong>Guardian Name:</strong> {tenant.guardianName}</p>
-                        <p><strong>Guardian Contact:</strong> {tenant.guardianContactNo}</p>
-                        <p><strong>Admission Date:</strong> {tenant.admissionDate}</p>
-                        <p><strong>Work Place:</strong> {tenant.workPlace}</p>
-                      </div>
-                      <div className="space-y-1">
-                        <p><strong>Aadhaar No:</strong> {tenant.aadhaarNo}</p>
-                        <p><strong>Room No:</strong> {tenant.roomNo}</p>
-                        <p><strong>Room Type:</strong> {tenant.roomType}</p>
+              {expandedTenantId === tenant.id && (
+                <div className="mt-4">
+                  {editingTenantId === tenant.id ? (
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-y-2 gap-x-6 text-sm text-[#152B37] font-medium">
+                      {[
+                        { label: "Name", name: "name" },
+                        { label: "Contact No", name: "contactNo" },
+                        { label: "Guardian Name", name: "guardianName" },
+                        { label: "Guardian Contact", name: "guardianContactNo" },
+                        { label: "Aadhaar No", name: "aadhaarNo" },
+                        { label: "Room No", name: "roomNo" },
+                        { label: "Room Type", name: "roomType" },
+                        {
+                          label: "Admission Date",
+                          name: "admissionDate",
+                          type: "date",
+                        },
+                        { label: "Work Place", name: "workPlace" },
+                        { label: "Building", name: "building" },
+                      ].map((field) => (
+                        <div key={field.name}>
+                          <label>{field.label}</label>
+                          <input
+                            type={field.type || "text"}
+                            name={field.name}
+                            value={editData[field.name] || ""}
+                            onChange={handleChange}
+                            className="w-full border p-2 rounded"
+                          />
+                        </div>
+                      ))}
+                      <div className="col-span-2 mt-4">
+                        <button
+                          onClick={() => handleSave(tenant.id)}
+                          disabled={savingTenantId === tenant.id}
+                          className={`px-4 py-2 rounded text-white flex items-center gap-2 ${
+                            savingTenantId === tenant.id
+                              ? "bg-green-400 cursor-not-allowed"
+                              : "bg-green-600 hover:bg-green-700"
+                          }`}
+                        >
+                          {savingTenantId === tenant.id ? (
+                            <>
+                              <svg
+                                className="animate-spin h-4 w-4 text-white"
+                                xmlns="http://www.w3.org/2000/svg"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                              >
+                                <circle
+                                  className="opacity-25"
+                                  cx="12"
+                                  cy="12"
+                                  r="10"
+                                  stroke="currentColor"
+                                  strokeWidth="4"
+                                ></circle>
+                                <path
+                                  className="opacity-75"
+                                  fill="currentColor"
+                                  d="M4 12a8 8 0 018-8v4l3-3-3-3v4a8 8 0 00-8 8h4z"
+                                ></path>
+                              </svg>
+                              Saving...
+                            </>
+                          ) : (
+                            "Save Changes"
+                          )}
+                        </button>
                       </div>
                     </div>
-                  )}
-
-                  {editingTenant?.id === tenant.id && (
-                    <div className="mt-4 border-t pt-4">
-                      <h4 className="text-base font-semibold text-[#295061] mb-3">Edit Tenant</h4>
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        {[
-                          { label: "Name", key: "name" },
-                          { label: "Contact No", key: "contactNo" },
-                          { label: "Guardian Name", key: "guardianName" },
-                          { label: "Guardian Contact", key: "guardianContactNo" },
-                          { label: "Admission Date", key: "admissionDate", type: "date" },
-                          { label: "Work Place", key: "workPlace" },
-                          { label: "Aadhaar No", key: "aadhaarNo" },
-                          { label: "Building", key: "building" },
-                          { label: "Room No", key: "roomNo" },
-                          { label: "Room Type", key: "roomType" },
-                        ].map(({ label, key, type = "text" }) => (
-                          <div key={key}>
-                            <label className="block text-sm font-medium text-[#152b37] mb-1">{label}</label>
-                            <input
-                              type={type}
-                              value={editFormData[key] || ""}
-                              onChange={(e) =>
-                                setEditFormData({ ...editFormData, [key]: e.target.value })
-                              }
-                              className="w-full px-3 py-1.5 border-2 border-[#948979] rounded-md text-sm"
-                            />
-                          </div>
-                        ))}
-                      </div>
-                      <button
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          handleUpdateTenant(tenant.id);
-                        }}
-                        className="mt-4 bg-green-600 text-white px-4 py-2 rounded-md hover:bg-green-700 flex items-center justify-center min-w-[120px]"
-                        disabled={isSaving}
-                      >
-                        {isSaving ? (
-                          <div className="h-4 w-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
-                        ) : (
-                          "Save Changes"
-                        )}
-                      </button>
+                  ) : (
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-y-1 gap-x-8 text-sm text-[#152B37] font-medium">
+                      <p>
+                        <strong>Room:</strong> {tenant.roomNo}
+                      </p>
+                      <p>
+                        <strong>Room Type:</strong> {tenant.roomType}
+                      </p>
+                      <p>
+                        <strong>Guardian Name:</strong> {tenant.guardianName}
+                      </p>
+                      <p>
+                        <strong>Guardian Contact:</strong> {tenant.guardianContactNo}
+                      </p>
+                      <p>
+                        <strong>Aadhaar:</strong> {tenant.aadhaarNo}
+                      </p>
+                      <p>
+                        <strong>Admission Date:</strong> {tenant.admissionDate}
+                      </p>
+                      <p>
+                        <strong>Work Place:</strong> {tenant.workPlace}
+                      </p>
                     </div>
                   )}
-                </>
+                </div>
               )}
             </div>
           ))}
-          {filteredTenants.length === 0 && (
-            <p className="text-center text-[#152b37] font-medium">No tenants found.</p>
-          )}
         </div>
+      ) : (
+        selectedBuilding && <p>No tenants found for this building.</p>
       )}
     </div>
   );
 };
 
-export default AllTenants;
+export default BuildingWiseData;

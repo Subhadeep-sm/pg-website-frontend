@@ -99,8 +99,8 @@ const AllTenants = () => {
               <div className="flex justify-between items-center">
                 <div className="flex flex-col lg:flex-row justify-center w-[60%]">
                   <h3 className="text-lg font-bold text-[#152b37] flex-[50%]">{tenant.name}</h3>
-                  <p className="font-bold text-sm text-gray-600 flex-[50%] ">
-                    📞 {tenant.contactNo} &nbsp;|&nbsp; 🏠 {tenant.building}
+                  <p className="font-bold text-xs/tight lg:text-xs/loose text-gray-700  ">
+                    {tenant.contactNo} | {tenant.building} ({tenant.roomNo})
                   </p>
                 </div>
 
@@ -142,11 +142,12 @@ const AllTenants = () => {
                         <p><strong>Guardian Name:</strong> {tenant.guardianName}</p>
                         <p><strong>Guardian Contact:</strong> {tenant.guardianContactNo}</p>
                         <p><strong>Admission Date:</strong> {tenant.admissionDate}</p>
-                        <p><strong>Work Place:</strong> {tenant.workPlace}</p>
+                        
                       </div>
                       <div className="space-y-1">
                         <p><strong>Aadhaar No:</strong> {tenant.aadhaarNo}</p>
-                        <p><strong>Room No:</strong> {tenant.roomNo}</p>
+                        <p><strong>Work Place:</strong> {tenant.workPlace}</p>
+                        
                         <p><strong>Room Type:</strong> {tenant.roomType}</p>
                       </div>
                     </div>
