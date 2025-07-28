@@ -8,6 +8,8 @@ const AllTenants = () => {
   const [editFormData, setEditFormData] = useState({});
   const [searchTerm, setSearchTerm] = useState("");
   const [loading, setLoading] = useState(true);
+  const [updatingTenantId, setUpdatingTenantId] = useState(null);
+  const [deletingTenantId, setDeletingTenantId] = useState(null);
 
   const fetchTenants = async () => {
     try {
@@ -32,20 +34,26 @@ const AllTenants = () => {
 
   const handleDelete = async (id) => {
     try {
+      setDeletingTenantId(id);
       await axios.delete(`https://pg-website-backend.onrender.com/api/tenants/${id}`);
       fetchTenants();
     } catch (err) {
       console.error("Error deleting tenant:", err);
+    } finally {
+      setDeletingTenantId(null);
     }
   };
 
   const handleUpdateTenant = async (id) => {
     try {
+      setUpdatingTenantId(id);
       await axios.put(`https://pg-website-backend.onrender.com/api/tenants/${id}`, editFormData);
       setEditingTenant(null);
       fetchTenants();
     } catch (err) {
       console.error("Error updating tenant:", err);
+    } finally {
+      setUpdatingTenantId(null);
     }
   };
 
@@ -59,8 +67,8 @@ const AllTenants = () => {
   });
 
   return (
-    <div className="p-4">
-      <h2 className="text-2xl font-bold mb-6 text-center text-[#295061]">All Tenants</h2>
+    <div className="p-4 mt-[13vh]">
+      <h2 className="text-3xl font-bold mb-6 text-center text-[#295061]">All Tenants</h2>
 
       <div className="mb-4 max-w-md mx-auto">
         <input
@@ -81,19 +89,18 @@ const AllTenants = () => {
           {filteredTenants.map((tenant) => (
             <div
               key={tenant.id}
-              className="bg-[#fff0db]  px-3 py-2.5 rounded-xl shadow-md border border-[#393E46] cursor-pointer"
+              className="bg-[#fff0db] px-3 py-2.5 rounded-xl shadow-md border border-[#393E46] cursor-pointer"
               onClick={(e) => {
                 if (!editingTenant || editingTenant?.id !== tenant.id) {
                   toggleExpand(tenant.id);
                 }
               }}
             >
-              {/* Header with vertical centering */}
-              <div className="flex justify-between items-center ">
+              <div className="flex justify-between items-center">
                 <div className="flex flex-col lg:flex-row justify-center w-[60%]">
                   <h3 className="text-lg font-bold text-[#152b37] flex-[50%]">{tenant.name}</h3>
-                  <p className="font-bold text-sm text-gray-600 flex-[50%] ">
-                    📞 {tenant.contactNo} &nbsp;|&nbsp; 🏠 {tenant.building}
+                  <p className="font-bold text-xs/tight lg:text-xs/loose text-gray-700  ">
+                    {tenant.contactNo} | {tenant.building} ({tenant.roomNo})
                   </p>
                 </div>
 
@@ -105,7 +112,7 @@ const AllTenants = () => {
                       setEditingTenant(tenant);
                       setEditFormData({ ...tenant });
                     }}
-                    className="bg-yellow-600 text-white px-3 py-1 rounded-md hover:bg-yellow-600 text-sm"
+                    className="bg-yellow-600 text-white px-3 py-1 rounded-md hover:bg-yellow-700 text-sm"
                   >
                     Edit
                   </button>
@@ -114,14 +121,19 @@ const AllTenants = () => {
                       e.stopPropagation();
                       handleDelete(tenant.id);
                     }}
-                    className="bg-red-600 text-white px-3 py-1 rounded-md hover:bg-red-600 text-sm"
+                    disabled={deletingTenantId === tenant.id}
+                    className={`bg-red-600 text-white px-3 py-1 rounded-md hover:bg-red-700 text-sm flex items-center gap-2 ${
+                      deletingTenantId === tenant.id ? "opacity-70 cursor-not-allowed" : ""
+                    }`}
                   >
-                    Delete
+                    {deletingTenantId === tenant.id && (
+                      <div className="w-3 h-3 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                    )}
+                    {deletingTenantId === tenant.id ? "Deleting..." : "Delete"}
                   </button>
                 </div>
               </div>
 
-              {/* Expanded Info Section */}
               {expandedId === tenant.id && (
                 <>
                   {(!editingTenant || editingTenant.id !== tenant.id) && (
@@ -130,22 +142,21 @@ const AllTenants = () => {
                         <p><strong>Guardian Name:</strong> {tenant.guardianName}</p>
                         <p><strong>Guardian Contact:</strong> {tenant.guardianContactNo}</p>
                         <p><strong>Admission Date:</strong> {tenant.admissionDate}</p>
-                        <p><strong>Work Place:</strong> {tenant.workPlace}</p>
+                        
                       </div>
-
                       <div className="space-y-1">
                         <p><strong>Aadhaar No:</strong> {tenant.aadhaarNo}</p>
-                        <p><strong>Room No:</strong> {tenant.roomNo}</p>
+                        <p><strong>Work Place:</strong> {tenant.workPlace}</p>
+                        
                         <p><strong>Room Type:</strong> {tenant.roomType}</p>
                       </div>
                     </div>
-
                   )}
 
                   {editingTenant?.id === tenant.id && (
                     <div className="mt-4 border-t pt-4">
                       <h4 className="text-base font-semibold text-[#295061] mb-3">Edit Tenant</h4>
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 ">
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         {[
                           { label: "Name", key: "name" },
                           { label: "Contact No", key: "contactNo" },
@@ -163,9 +174,7 @@ const AllTenants = () => {
                             <input
                               type={type}
                               value={editFormData[key] || ""}
-                              onChange={(e) =>
-                                setEditFormData({ ...editFormData, [key]: e.target.value })
-                              }
+                              onChange={(e) => setEditFormData({ ...editFormData, [key]: e.target.value })}
                               className="w-full px-3 py-1.5 border-2 border-[#948979] rounded-md text-sm"
                             />
                           </div>
@@ -176,9 +185,15 @@ const AllTenants = () => {
                           e.stopPropagation();
                           handleUpdateTenant(tenant.id);
                         }}
-                        className="mt-4 bg-green-600 text-white px-4 py-2 rounded-md hover:bg-green-700"
+                        disabled={updatingTenantId === tenant.id}
+                        className={`mt-4 bg-green-600 text-white px-4 py-2 rounded-md hover:bg-green-700 flex items-center gap-2 ${
+                          updatingTenantId === tenant.id ? "opacity-70 cursor-not-allowed" : ""
+                        }`}
                       >
-                        Save Changes
+                        {updatingTenantId === tenant.id && (
+                          <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                        )}
+                        {updatingTenantId === tenant.id ? "Saving..." : "Save Changes"}
                       </button>
                     </div>
                   )}

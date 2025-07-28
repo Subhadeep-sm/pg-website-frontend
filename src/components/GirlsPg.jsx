@@ -2,7 +2,7 @@ import React from "react";
 
 const GirlsPG = () => {
   return (
-    <div className="min-h-screen bg-gradient-to-br bg-[#f3f1ec] px-4">
+    <div className="min-h-screen bg-gradient-to-br bg-[#f3f1ec] px-4 mt-[10vh]">
       {/* Page Heading */}
       <div className="text-center pt-16">
         <h1 className="text-5xl font-bold text-[#222831]">Girls PG</h1>

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { toast } from "react-toastify";
 
 const BuildingWiseData = () => {
   const [buildings, setBuildings] = useState([]);
@@ -9,6 +10,8 @@ const BuildingWiseData = () => {
   const [editingTenantId, setEditingTenantId] = useState(null);
   const [editData, setEditData] = useState({});
   const [loading, setLoading] = useState(false);
+  const [deletingTenantId, setDeletingTenantId] = useState(null);
+  const [savingTenantId, setSavingTenantId] = useState(null);
 
   useEffect(() => {
     axios
@@ -38,6 +41,7 @@ const BuildingWiseData = () => {
   };
 
   const handleEdit = (tenant) => {
+    setExpandedTenantId(tenant.id);
     setEditingTenantId(tenant.id);
     setEditData({ ...tenant });
   };
@@ -48,33 +52,42 @@ const BuildingWiseData = () => {
   };
 
   const handleSave = (id) => {
+    setSavingTenantId(id);
     axios
-      .put(
-        `https://pg-website-backend.onrender.com/api/tenants/${id}`,
-        editData
-      )
+      .put(`https://pg-website-backend.onrender.com/api/tenants/${id}`, editData)
       .then(() => {
         const updated = tenants.map((t) => (t.id === id ? editData : t));
         setTenants(updated);
         setEditingTenantId(null);
+        toast.success("Tenant updated successfully");
       })
-      .catch((err) => console.error("Update failed:", err));
+      .catch((err) => {
+        console.error("Update failed:", err);
+        toast.error("Failed to update tenant");
+      })
+      .finally(() => setSavingTenantId(null));
   };
 
   const handleDelete = (id) => {
     if (!window.confirm("Are you sure you want to delete this tenant?")) return;
+    setDeletingTenantId(id);
     axios
       .delete(`https://pg-website-backend.onrender.com/api/tenants/${id}`)
       .then(() => {
         const updated = tenants.filter((t) => t.id !== id);
         setTenants(updated);
+        toast.success("Tenant deleted");
       })
-      .catch((err) => console.error("Delete failed:", err));
+      .catch((err) => {
+        console.error("Delete failed:", err);
+        toast.error("Failed to delete tenant");
+      })
+      .finally(() => setDeletingTenantId(null));
   };
 
   return (
-    <div className="p-6 bg-gray-50 min-h-screen">
-      <h2 className="text-3xl font-bold mb-6 text-gray-800">Building‑wise Data</h2>
+    <div className="p-6 bg-gray-50 min-h-screen mt-[15vh]">
+      <h2 className="text-3xl font-bold mb-6 text-gray-800">Building​-wise Data</h2>
 
       <select
         onChange={handleBuildingChange}
@@ -100,24 +113,22 @@ const BuildingWiseData = () => {
             >
               <div
                 className="flex justify-between items-center cursor-pointer"
-                onClick={() =>
+                onClick={() => {
+                  if (editingTenantId === tenant.id) return;
                   setExpandedTenantId(
                     expandedTenantId === tenant.id ? null : tenant.id
-                  )
-                }
+                  );
+                }}
               >
-                <div className="flex justify-center w-[60%]">
+                <div className="flex flex-col md:flex-row  w-full md:w-[60%] ">
                   <h3 className="text-lg font-semibold text-[#152B37] w-[50%]">
                     {tenant.name}
                   </h3>
-                  <p className="text-sm text-gray-700 mt-1 items-center w-[50%]">
-                    <span className="text-pink-600 mr-1 ">📞</span>
-                    {tenant.contactNo} &nbsp;|&nbsp;
-                    <span className="text-green-700 ml-1">🏠</span>
-                    {tenant.building}
+                  <p className="text-xs/tight lg:text-xs/loose text-gray-700 font-bold ">
+                    {tenant.contactNo} | {tenant.building} ({tenant.roomNo})
                   </p>
                 </div>
-                <div className="flex gap-2">
+                <div className="flex gap-2 z-10">
                   <button
                     onClick={(e) => {
                       e.stopPropagation();
@@ -132,9 +143,40 @@ const BuildingWiseData = () => {
                       e.stopPropagation();
                       handleDelete(tenant.id);
                     }}
-                    className="bg-red-600 text-white px-3 py-1 rounded hover:bg-red-700"
+                    disabled={deletingTenantId === tenant.id}
+                    className={`text-white px-3 py-1 rounded flex items-center gap-2 ${
+                      deletingTenantId === tenant.id
+                        ? "bg-red-400 cursor-not-allowed"
+                        : "bg-red-600 hover:bg-red-700"
+                    }`}
                   >
-                    Delete
+                    {deletingTenantId === tenant.id ? (
+                      <>
+                        <svg
+                          className="animate-spin h-4 w-4 text-white"
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                        >
+                          <circle
+                            className="opacity-25"
+                            cx="12"
+                            cy="12"
+                            r="10"
+                            stroke="currentColor"
+                            strokeWidth="4"
+                          ></circle>
+                          <path
+                            className="opacity-75"
+                            fill="currentColor"
+                            d="M4 12a8 8 0 018-8v4l3-3-3-3v4a8 8 0 00-8 8h4z"
+                          ></path>
+                        </svg>
+                        Deleting...
+                      </>
+                    ) : (
+                      "Delete"
+                    )}
                   </button>
                 </div>
               </div>
@@ -173,9 +215,40 @@ const BuildingWiseData = () => {
                       <div className="col-span-2 mt-4">
                         <button
                           onClick={() => handleSave(tenant.id)}
-                          className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700"
+                          disabled={savingTenantId === tenant.id}
+                          className={`px-4 py-2 rounded text-white flex items-center gap-2 ${
+                            savingTenantId === tenant.id
+                              ? "bg-green-400 cursor-not-allowed"
+                              : "bg-green-600 hover:bg-green-700"
+                          }`}
                         >
-                          Save Changes
+                          {savingTenantId === tenant.id ? (
+                            <>
+                              <svg
+                                className="animate-spin h-4 w-4 text-white"
+                                xmlns="http://www.w3.org/2000/svg"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                              >
+                                <circle
+                                  className="opacity-25"
+                                  cx="12"
+                                  cy="12"
+                                  r="10"
+                                  stroke="currentColor"
+                                  strokeWidth="4"
+                                ></circle>
+                                <path
+                                  className="opacity-75"
+                                  fill="currentColor"
+                                  d="M4 12a8 8 0 018-8v4l3-3-3-3v4a8 8 0 00-8 8h4z"
+                                ></path>
+                              </svg>
+                              Saving...
+                            </>
+                          ) : (
+                            "Save Changes"
+                          )}
                         </button>
                       </div>
                     </div>

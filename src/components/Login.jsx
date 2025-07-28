@@ -10,7 +10,7 @@ const Login = () => {
     };
 
     return (
-        <div className="flex items-center justify-center h-screen bg-[#f2f2f2]">
+        <div className="flex items-center justify-center h-screen bg-[#f2f2f2] mt-[15vh]">
             <form
                 onSubmit={handleLogin}
                 className="bg-[#fff0db] text-gray-800 p-8 rounded-2xl shadow-xl w-96"

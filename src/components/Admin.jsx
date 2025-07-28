@@ -6,7 +6,7 @@ const Admin = ({ user, handleLogout }) => {
   const sections = ["Home", "Facilities", "Boys PG", "Girls PG", "Contact Us"];
 
   return (
-    <div className="flex min-h-screen bg-[#DFD0B8]">
+    <div className="flex min-h-screen bg-[#DFD0B8] mt-[10vh]">
       {/* Sidebar */}
       <aside className="w-64 bg-[#393E46] text-[#DFD0B8] p-6 flex flex-col justify-between">
         <div>

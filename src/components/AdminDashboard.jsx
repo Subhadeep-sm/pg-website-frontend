@@ -101,7 +101,7 @@ const AdminDashboard = () => {
   return (
     <>
       <Header />
-      <div className="mb-10 p-4 mt-5">
+      <div className="mb-10 p-4 mt-[15vh]">
         <div className="flex max-w-7xl mx-auto items-center justify-between mb-6 bg-[#DFD0B8] p-4 rounded-lg shadow-md">
           <div>
             <h1 className="text-xl font-bold text-[#2f2804] md:text-2xl">
