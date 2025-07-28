@@ -48,8 +48,8 @@ const Facilities = () => {
   return (
     <>
       <Header />
-      <div className="bg-[#f2f2f2] min-h-screen p-6">
-        <h2 className="text-center text-3xl font-bold mb-4 text-[#152b37]">Facilities</h2>
+      <div className="bg-[#f2f2f2] min-h-screen p-6 mt-[13vh]">
+        <h2 className="text-center text-5xl font-bold mb-4 text-[#152b37]">Facilities</h2>
         <p className="text-center text-[#295061] mb-10">
           Enjoy Royal amenities designed for comfort and convenience.
         </p>

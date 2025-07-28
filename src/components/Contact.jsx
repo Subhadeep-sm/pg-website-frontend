@@ -58,7 +58,7 @@ const Contact = () => {
   };
 
   return (
-  <div className=" bg-[#fff] flex flex-col items-center px-4 py-12 mt-[0.8vh] mb-5">
+  <div className=" bg-[#fff] flex flex-col items-center px-4 py-12 mt-[10vh] mb-5 ">
     <h2 className="text-5xl font-bold text-center mb-8 text-gray-800">Contact Us</h2>
 
     {/* Flex container for desktop */}

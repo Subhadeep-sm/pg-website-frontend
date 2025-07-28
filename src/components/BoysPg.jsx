@@ -68,10 +68,10 @@ const BoysPG = () => {
   }
 
   return (
-    <div className="text-gray-800">
+    <div className="text-gray-800 mt-[10vh]">
       {/* Intro */}
       <section className="bg-gradient-to-r from-[#f2f2f2] to-[#f2f2f2] text-center py-16 px-6">
-        <h1 className="text-4xl font-bold mb-4 text-[#222831]">Boys PG Accommodations</h1>
+        <h1 className="text-5xl font-bold mb-4 text-[#222831]">Boys PG Accommodations</h1>
         <p className="text-lg text-[#444]">Find safe, clean, and Royal Boys PGs near you.</p>
       </section>
 

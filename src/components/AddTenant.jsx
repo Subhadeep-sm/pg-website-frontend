@@ -18,13 +18,14 @@ const AddTenant = () => {
   });
 
   const [buildings, setBuildings] = useState([]);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [successMsg, setSuccessMsg] = useState("");
 
-  // Fetch buildings from API on mount
   useEffect(() => {
     const fetchBuildings = async () => {
       try {
         const response = await axios.get("https://pg-website-backend.onrender.com/api/buildings");
-        setBuildings(response.data); // Expected format: [{ id: 1, name: "Building A" }, ...]
+        setBuildings(response.data);
       } catch (error) {
         console.error("Error fetching buildings:", error);
       }
@@ -40,22 +41,16 @@ const AddTenant = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsSubmitting(true);
+    setSuccessMsg("");
 
     const formattedDate = tenant.admissionDate
       ? new Date(tenant.admissionDate).toISOString().split("T")[0]
       : "";
 
     const formattedTenant = {
-      name: tenant.name,
-      contactNo: tenant.contactNo,
-      guardianName: tenant.guardianName,
-      guardianContactNo: tenant.guardianContactNo,
+      ...tenant,
       admissionDate: formattedDate,
-      workPlace: tenant.workPlace,
-      aadhaarNo: tenant.aadhaarNo,
-      building: tenant.building,
-      roomNo: tenant.roomNo,
-      roomType: tenant.roomType,
     };
 
     try {
@@ -68,10 +63,8 @@ const AddTenant = () => {
           },
         }
       );
-      console.log("Tenant added:", response.data);
-      alert("Tenant added successfully!");
 
-      // Reset form
+      setSuccessMsg("✅ Tenant added successfully!");
       setTenant({
         name: "",
         contactNo: "",
@@ -86,15 +79,17 @@ const AddTenant = () => {
       });
     } catch (err) {
       console.error("Error adding tenant:", err.response?.data || err.message);
-      alert(
-        "Failed to add tenant. Server says: " +
+      setSuccessMsg(
+        "❌ Failed to add tenant: " +
           (err.response?.data?.error || "Unknown error")
       );
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
   return (
-    <section className="e min-h-[80vh] p-4">
+    <section className="mt-[12vh] min-h-[80vh] p-4">
       <h2 className="text-3xl mt-[2vh] font-bold mb-4 text-center text-[#222831]">Add Tenant Data</h2>
       <div className="max-w-6xl mx-auto mt-6 p-4 rounded-lg bg-[#DFD0B8] text-[#222831] shadow-lg shadow-black/25">
         <form onSubmit={handleSubmit} className="grid grid-cols-1 gap-4">
@@ -238,12 +233,24 @@ const AddTenant = () => {
             </div>
           </div>
 
-          <button
-            type="submit"
-            className="mt-4 font-bold bg-[#948979] border-2 border-[#5a4c37] text-white py-2 px-4 rounded hover:bg-[#393E46] w-[30%] mx-auto"
-          >
-            Submit
-          </button>
+          {isSubmitting ? (
+            <div className="mt-4 flex justify-center">
+              <div className="w-6 h-6 border-4 border-[#948979] border-t-transparent rounded-full animate-spin" />
+            </div>
+          ) : (
+            <button
+              type="submit"
+              className="mt-4 font-bold bg-[#948979] border-2 border-[#5a4c37] text-white py-2 px-4 rounded hover:bg-[#393E46] w-[30%] mx-auto"
+            >
+              Submit
+            </button>
+          )}
+
+          {successMsg && (
+            <p className="mt-4 text-center text-lg font-semibold text-[#222831]">
+              {successMsg}
+            </p>
+          )}
         </form>
       </div>
     </section>

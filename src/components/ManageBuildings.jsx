@@ -54,7 +54,7 @@ const ManageBuildings = () => {
   };
 
   return (
-    <div className="max-w-6xl mx-auto py-10 px-4 bg-white min-h-screen mt-[0.8vh]">
+    <div className="max-w-6xl mx-auto py-10 px-4 bg-white min-h-screen mt-[14vh]">
       <h2 className="text-4xl font-bold text-center mb-10 text-[#222831]">Manage Buildings</h2>
 
       {/* Add form */}

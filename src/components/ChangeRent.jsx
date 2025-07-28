@@ -44,7 +44,7 @@ const ChangeRent = () => {
   };
 
   return (
-    <div className="max-w-6xl mx-auto py-15 px-4">
+    <div className="max-w-6xl mx-auto py-15 px-4 mt-[10vh]">
       <h2 className="text-4xl font-bold text-center mb-10 text-gray-800">Change Rent</h2>
 
       {error && <p className="text-red-600 text-center mb-4">{error}</p>}
