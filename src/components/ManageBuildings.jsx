@@ -16,7 +16,7 @@ const ManageBuildings = () => {
   const fetchBuildings = async () => {
     try {
       setLoading(true);
-      const res = await axios.get("https://pg-website-backend.onrender.com/api/buildings");
+      const res = await axios.get("https://frail-bambie-soumyaghosh-0d1c4401.koyeb.app/api/buildings");
       setBuildings(res.data);
     } catch (err) {
       console.error(err);
@@ -30,7 +30,7 @@ const ManageBuildings = () => {
     if (!newBuilding.trim()) return; // Prevent adding empty strings
     try {
       setAdding(true);
-      await axios.post("https://pg-website-backend.onrender.com/api/buildings", {
+      await axios.post("https://frail-bambie-soumyaghosh-0d1c4401.koyeb.app/api/buildings", {
         name: newBuilding,
       });
       setNewBuilding("");
@@ -45,7 +45,7 @@ const ManageBuildings = () => {
 
   const deleteBuilding = async (id) => {
     try {
-      await axios.delete(`https://pg-website-backend.onrender.com/api/buildings/${id}`);
+      await axios.delete(`https://frail-bambie-soumyaghosh-0d1c4401.koyeb.app/api/buildings/${id}`);
       fetchBuildings();
     } catch (err) {
       console.error(err);
