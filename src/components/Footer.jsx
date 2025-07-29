@@ -12,11 +12,11 @@ const Footer = () => {
         
         {/* Logo and Name */}
         <div>
-          <div className="flex items-center gap-3 mb-3">
+          <div className="flex justify-center items-center gap-3 mb-3">
             <img 
               src={royalPgLogo} 
               alt="Royal PG Logo" 
-              className="h-16 md:h-18 lg:h-20 w-auto drop-shadow-md drop-shadow-amber-50"
+              className="h-18 md:h-20 lg:h-26 w-auto drop-shadow-md drop-shadow-amber-50"
             />
             {/* <h1 className="text-3xl font-bold">
               <span className="text-[#fff]">ROYAL</span>
@@ -26,19 +26,19 @@ const Footer = () => {
         </div>
 
         {/* Contact Info */}
-        <div>
-          <h3 className="text-xl font-semibold mb-4">Contact Us</h3>
-          <p className="mb-2 flex items-center gap-2">
+        <div className="items-center justify-center">
+          <h3 className="text-xl font-semibold mb-4 text-center">Contact Us</h3>
+          <p className="mb-2 flex items-center gap-2 text-center justify-center">
             <FaMapMarkerAlt /> Rose Apartments, Sector V, Bidhannagar,
           </p>
-          <p className="mb-2 pl-6">Kolkata, West Bengal 700102</p>
-          <p className="mb-2 flex items-center gap-2">
+          <p className="mb-2 pl-6 text-center justify-center">Kolkata, West Bengal 700102</p>
+          <p className="mb-2 flex items-center gap-2 text-center justify-center">
             <FaPhone /> 9088432555
           </p>
-          <p className="mb-2 flex items-center gap-2">
+          <p className="mb-2 flex items-center gap-2 text-center justify-center">
             <FaPhone /> 9038227687
           </p>
-          <p className="mb-2 flex items-center gap-2">
+          <p className="mb-2 flex items-center gap-2 text-center justify-center">
             <FaPhone /> 9830974784
           </p>
         
@@ -46,8 +46,8 @@ const Footer = () => {
 
         {/* Useful Links */}
         <div>
-          <h3 className="text-xl font-semibold mb-4">Useful Links</h3>
-          <ul className="space-y-2">
+          <h3 className="text-xl font-semibold mb-4 text-center justify-center">Useful Links</h3>
+          <ul className="space-y-2 text-center justify-center">
             <Link to="/facilities"><li>» Facilities</li></Link>
             <Link to="/BoysPg"><li>» Boys PG</li></Link>
             <Link to="/GirlsPg"><li>» Girls PG</li></Link>

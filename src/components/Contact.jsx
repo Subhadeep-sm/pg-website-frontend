@@ -101,7 +101,7 @@ const Contact = () => {
               onChange={handleChange}
               required
               className="mt-1 w-full px-4 py-2 border border-black rounded-md placeholder-white focus:outline-none focus:ring-2 focus:ring-black font-bold bg-[#948979] text-white"
-              placeholder="your@email.com"
+              placeholder="yourmail@email.com"
             />
           </div>
           <div>
@@ -155,7 +155,7 @@ const Contact = () => {
             </div>
           </div>
           <h3 className="text-lg font-semibold">Email ID</h3>
-          <p className="text-gray-700 mt-1">royalpg00@gmail.com</p>
+          <p className="text-gray-700 mt-1"><a href="mailto:royalpg00@gmail">royalpg00@gmail.com</a></p>
         </div>
 
         {/* Address */}
@@ -167,7 +167,7 @@ const Contact = () => {
           </div>
           <h3 className="text-lg font-semibold">Address</h3>
           <p className="text-gray-700 mt-1">
-            Rose Apartments, Sector V, Bidhannagar, Kolkata, West Bengal 700102
+            Rose Apartments, Sector-V, Bidhannagar, Kolkata, West Bengal 700091
           </p>
         </div>
       </div>

@@ -34,10 +34,10 @@ const About = () => {
               <span className="text-[#7f7566] font-bold">
                 Boys and Girls PG in Mahisbathan, Saltlake Sector 5, Kolkata,
               </span>{" "}
-              designed for comfort, safety, and peace of mind. Whether you're a student or a working professional, we offer an ideal stay that feels just like home.
+              designed for comfort, safety and peace of mind. Whether you're a student or a working professional, we offer an ideal stay that feels just like home.
             </p>
             <p className="mb-6">
-              Enjoy spacious, fully furnished rooms, healthy and tasty homemade food, and reliable 24/7 security. At Royal PG, we maintain top-notch hygiene and service standards—setting us apart from other PGs in the Saltlake area that often fall short on cleanliness and care.
+              Enjoy spacious, fully furnished rooms, healthy and tasty homemade food, and reliable 24/7 security. At Royal PG, we maintain top-notch hygiene and service standards—setting us apart from other PGs in the Salt Lake area that often fall short on cleanliness and care.
             </p>
             <a href="/contact">
               <button className="bg-[#71685b] hover:bg-[#e4d5b7] hover:text-[#71685b] text-white font-semibold px-5 py-2 rounded">
