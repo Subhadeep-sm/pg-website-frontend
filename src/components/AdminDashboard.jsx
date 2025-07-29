@@ -69,7 +69,7 @@ const AdminDashboard = () => {
     try {
       setDownloading(true); // ✅ Start loader
       const response = await fetch(
-        "https://pg-website-backend.onrender.com/api/tenants/download",
+        "https://frail-bambie-soumyaghosh-0d1c4401.koyeb.app/api/tenants/download",
         {
           method: "GET",
           headers: {

@@ -12,7 +12,7 @@ const BoysPG = () => {
   useEffect(() => {
     const fetchPGData = async () => {
       try {
-        const response = await axios.get("https://pg-website-backend.onrender.com/api/rent/all");
+        const response = await axios.get("https://frail-bambie-soumyaghosh-0d1c4401.koyeb.app/api/rent/all");
         setPgData(response.data);
       } catch (err) {
         console.error(err);
@@ -22,7 +22,7 @@ const BoysPG = () => {
 
     const fetchBuildings = async () => {
       try {
-        const response = await axios.get("https://pg-website-backend.onrender.com/api/buildings");
+        const response = await axios.get("https://frail-bambie-soumyaghosh-0d1c4401.koyeb.app/api/buildings");
         setBuildingData(response.data);
       } catch (err) {
         console.error(err);

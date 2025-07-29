@@ -24,7 +24,7 @@ const AddTenant = () => {
   useEffect(() => {
     const fetchBuildings = async () => {
       try {
-        const response = await axios.get("https://pg-website-backend.onrender.com/api/buildings");
+        const response = await axios.get("https://frail-bambie-soumyaghosh-0d1c4401.koyeb.app/api/buildings");
         setBuildings(response.data);
       } catch (error) {
         console.error("Error fetching buildings:", error);
@@ -55,7 +55,7 @@ const AddTenant = () => {
 
     try {
       const response = await axios.post(
-        "https://pg-website-backend.onrender.com/api/tenants",
+        "https://frail-bambie-soumyaghosh-0d1c4401.koyeb.app/api/tenants",
         formattedTenant,
         {
           headers: {

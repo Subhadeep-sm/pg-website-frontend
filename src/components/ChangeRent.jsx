@@ -13,7 +13,7 @@ const ChangeRent = () => {
   const fetchRents = async () => {
     try {
       setLoading(true);
-      const res = await axios.get("https://pg-website-backend.onrender.com/api/rent/all");
+      const res = await axios.get("https://frail-bambie-soumyaghosh-0d1c4401.koyeb.app/api/rent/all");
       setRents(res.data);
     } catch (err) {
       console.error(err);
@@ -31,7 +31,7 @@ const ChangeRent = () => {
 
   const updateRent = async (roomType, lowRent, highRent) => {
     try {
-      await axios.put(`https://pg-website-backend.onrender.com/api/rent/${roomType}`, {
+      await axios.put(`https://frail-bambie-soumyaghosh-0d1c4401.koyeb.app/api/rent/${roomType}`, {
         roomType,
         lowRent: Number(lowRent),
         highRent: Number(highRent),

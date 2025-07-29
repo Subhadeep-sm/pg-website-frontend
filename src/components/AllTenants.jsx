@@ -14,7 +14,7 @@ const AllTenants = () => {
   const fetchTenants = async () => {
     try {
       setLoading(true);
-      const response = await axios.get("https://pg-website-backend.onrender.com/api/tenants");
+      const response = await axios.get("https://frail-bambie-soumyaghosh-0d1c4401.koyeb.app/api/tenants");
       setTenants(response.data);
     } catch (err) {
       console.error("Error fetching tenants:", err);
@@ -35,7 +35,7 @@ const AllTenants = () => {
   const handleDelete = async (id) => {
     try {
       setDeletingTenantId(id);
-      await axios.delete(`https://pg-website-backend.onrender.com/api/tenants/${id}`);
+      await axios.delete(`https://frail-bambie-soumyaghosh-0d1c4401.koyeb.app/api/tenants/${id}`);
       fetchTenants();
     } catch (err) {
       console.error("Error deleting tenant:", err);
@@ -47,7 +47,7 @@ const AllTenants = () => {
   const handleUpdateTenant = async (id) => {
     try {
       setUpdatingTenantId(id);
-      await axios.put(`https://pg-website-backend.onrender.com/api/tenants/${id}`, editFormData);
+      await axios.put(`https://frail-bambie-soumyaghosh-0d1c4401.koyeb.app/api/tenants/${id}`, editFormData);
       setEditingTenant(null);
       fetchTenants();
     } catch (err) {

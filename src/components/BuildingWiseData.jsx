@@ -15,7 +15,7 @@ const BuildingWiseData = () => {
 
   useEffect(() => {
     axios
-      .get("https://pg-website-backend.onrender.com/api/buildings")
+      .get("https://frail-bambie-soumyaghosh-0d1c4401.koyeb.app/api/buildings")
       .then((res) => setBuildings(res.data))
       .catch((err) => console.error("Error fetching buildings:", err));
   }, []);
@@ -31,7 +31,7 @@ const BuildingWiseData = () => {
     setLoading(true);
     axios
       .get(
-        `https://pg-website-backend.onrender.com/api/tenants/by-building/${encodeURIComponent(
+        `https://frail-bambie-soumyaghosh-0d1c4401.koyeb.app/api/tenants/by-building/${encodeURIComponent(
           buildingName
         )}`
       )
@@ -54,7 +54,7 @@ const BuildingWiseData = () => {
   const handleSave = (id) => {
     setSavingTenantId(id);
     axios
-      .put(`https://pg-website-backend.onrender.com/api/tenants/${id}`, editData)
+      .put(`https://frail-bambie-soumyaghosh-0d1c4401.koyeb.app/api/tenants/${id}`, editData)
       .then(() => {
         const updated = tenants.map((t) => (t.id === id ? editData : t));
         setTenants(updated);
@@ -72,7 +72,7 @@ const BuildingWiseData = () => {
     if (!window.confirm("Are you sure you want to delete this tenant?")) return;
     setDeletingTenantId(id);
     axios
-      .delete(`https://pg-website-backend.onrender.com/api/tenants/${id}`)
+      .delete(`https://frail-bambie-soumyaghosh-0d1c4401.koyeb.app/api/tenants/${id}`)
       .then(() => {
         const updated = tenants.filter((t) => t.id !== id);
         setTenants(updated);
