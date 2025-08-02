@@ -1,6 +1,6 @@
 import React from "react";
-import primeLocation from "../assets/prime-location.png";
-import cleanRoom from "../assets/clean-room.png";
+import primeLocation from "../assets/prime-location.jpg";
+import cleanRoom from "../assets/clean-room.jpg";
 import homeCookedFood from "../assets/food.png";
 import wifiImage from "../assets/wifi-service.png";
 

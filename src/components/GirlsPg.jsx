@@ -2,7 +2,7 @@ import React from "react";
 
 const GirlsPG = () => {
   return (
-    <div className="min-h-screen bg-gradient-to-br bg-[#f3f1ec] px-4 mt-[10vh]">
+    <div className="min-h-[80vh] bg-gradient-to-br bg-[#f3f1ec] px-4 mt-[10vh]">
       {/* Page Heading */}
       <div className="text-center pt-16">
         <h1 className="text-5xl font-bold text-[#222831]">Girls PG</h1>
@@ -10,8 +10,8 @@ const GirlsPG = () => {
       </div>
 
       {/* Coming Soon Message */}
-      <div className="flex items-center justify-center h-[calc(100vh-120px)]">
-        <div className="text-center p-10 rounded-xl shadow-lg bg-[#fdebd0] animate-fadeIn">
+      <div className="flex items-center justify-center mt-[10vh]">
+        <div className="text-center p-10   animate-fadeIn">
           <p className="text-5xl font-bold text-[#5c4b3c]">Coming Soon !!!</p>
         </div>
       </div>
